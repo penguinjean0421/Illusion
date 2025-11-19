@@ -1,12 +1,22 @@
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
+
 
 public class GameManager : MonoBehaviour
 {
+  
+
     [SerializeField]
     GameObject ball, startButton, highScoreText, scoreText, quitButton, restartButton;
 
-    int score, highScore;
+    [SerializeField]
+    Text text;
+
+    int score, highScore, minute, second;
+    [SerializeField]
+    float time, curTime;
+    
 
     [SerializeField]
     Rigidbody2D left, right;
@@ -89,6 +99,7 @@ public class GameManager : MonoBehaviour
         scoreText.SetActive(true);
         Instantiate(ball, startPos, Quaternion.identity);
         canPlay = true;
+        StartCoroutine(StartTimer());
     }
 
     public void GameQuit()
@@ -103,4 +114,26 @@ public class GameManager : MonoBehaviour
     {
         UnityEngine.SceneManagement.SceneManager.LoadScene(0);
     }
+
+    #region TimeCoroutine
+    IEnumerator StartTimer()
+    {
+        curTime = time;
+        while(curTime > 0)
+        {
+            curTime -= Time.deltaTime;
+            minute = (int)curTime / 60;
+            second = (int)curTime % 60;
+            text.text = minute.ToString("00") + ":" + second.ToString("00");
+            yield return null;
+
+            if(curTime <= 0)
+            {
+                Debug.Log("라운드 종료");
+                curTime = 0;
+                yield break;
+            }
+        }
+    }
+    #endregion
 }
