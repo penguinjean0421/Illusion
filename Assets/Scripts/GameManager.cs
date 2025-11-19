@@ -1,40 +1,36 @@
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 using System.Collections;
+
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager instance { get; private set; }
+  
 
-    public GameObject ball;
-    public Vector3 startPos;
+    [SerializeField]
+    GameObject ball, startButton, highScoreText, scoreText, quitButton, restartButton;
 
+    [SerializeField]
+    Text text;
+
+    int score, highScore, minute, second;
+    [SerializeField]
+    float time, curTime;
+    
+
+    [SerializeField]
     Rigidbody2D left, right;
 
-    //UI
-    GameObject startButton;
-    GameObject quitButton;
-    GameObject restartButton;
-    Text highScoreText, scoreText;
-    Text timerText;
+    [SerializeField]
+    Vector3 startPos;
 
-    // 상점
-    GameObject store;
-    GameObject storeCloseButton;
+    public int multiplier;
 
-    // 점수
-    int score, highScore;
+    bool canPlay;
 
-    // 타이머
-    public float time;
-    int minute, second;
-    float curTime;
+    public static GameManager instance;
 
-    internal int multiplier;
-    bool isCanPlay;
-
-    void Awake()
+    private void Awake()
     {
         if (instance == null)
         {
@@ -45,23 +41,17 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
 
-        OnInitialize();
-    }
-
-    void Start()
-    {
         Time.timeScale = 1;
         score = 0;
         multiplier = 1;
         highScore = PlayerPrefs.HasKey("HighScore") ? PlayerPrefs.GetInt("HighScore") : 0;
-        highScoreText.text = $"HighScore : {highScore}";
-        isCanPlay = false;
+        highScoreText.GetComponent<Text>().text = "HighScore : " + highScore;
+        canPlay = false;
     }
 
-    void Update()
+    private void Update()
     {
-        if (!isCanPlay) { return; }
-
+        if (!canPlay) return;
         if (Input.GetKey(KeyCode.A))
         {
             left.AddTorque(25f);
@@ -70,7 +60,6 @@ public class GameManager : MonoBehaviour
         {
             left.AddTorque(-20f);
         }
-
         if (Input.GetKey(KeyCode.D))
         {
             right.AddTorque(-25f);
@@ -86,60 +75,30 @@ public class GameManager : MonoBehaviour
     {
         multiplier += mullIncrease;
         score += point * multiplier;
-        scoreText.text = $"Score : {score}";
-        Debug.Log($"multiplier : {multiplier}");
+        scoreText.GetComponent<Text>().text = "Score : " + score;
     }
 
     public void GameEnd()
     {
         Time.timeScale = 0;
-
-        highScoreText.gameObject.SetActive(true);
+        highScoreText.SetActive(true);
         quitButton.SetActive(true);
         restartButton.SetActive(true);
-
         if (score > highScore)
         {
             PlayerPrefs.SetInt("HighScore", score);
             highScore = score;
         }
-        highScoreText.text = $"HighScore : {highScore}";
+        highScoreText.GetComponent<Text>().text = "HighScore : " + highScore;
     }
 
-    #region TimeCoroutine
-    IEnumerator StartTimer()
-    {
-        curTime = time;
-        while (curTime > 0)
-        {
-            curTime -= Time.deltaTime;
-            minute = (int)curTime / 60;
-            second = (int)curTime % 60;
-            timerText.text = minute.ToString("00") + ":" + second.ToString("00");
-            yield return null;
-
-            if (curTime <= 0)
-            {
-                Debug.Log("라운드 종료");
-                curTime = 0;
-                Time.timeScale = 0;
-                store.SetActive(true);
-                yield break;
-            }
-        }
-    }
-    #endregion
-
-    #region Buttons
     public void GameStart()
     {
-        highScoreText.gameObject.SetActive(false);
+        highScoreText.SetActive(false);
         startButton.SetActive(false);
-
-        scoreText.gameObject.SetActive(true);
-
+        scoreText.SetActive(true);
         Instantiate(ball, startPos, Quaternion.identity);
-        isCanPlay = true;
+        canPlay = true;
         StartCoroutine(StartTimer());
     }
 
@@ -153,38 +112,28 @@ public class GameManager : MonoBehaviour
 
     public void GameRestart()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        UnityEngine.SceneManagement.SceneManager.LoadScene(0);
     }
 
-    public void StoreClose()
+    #region TimeCoroutine
+    IEnumerator StartTimer()
     {
-        store.SetActive(false);
-    }
-    #endregion
+        curTime = time;
+        while(curTime > 0)
+        {
+            curTime -= Time.deltaTime;
+            minute = (int)curTime / 60;
+            second = (int)curTime % 60;
+            text.text = minute.ToString("00") + ":" + second.ToString("00");
+            yield return null;
 
-    #region Initialize
-    void OnInitialize()
-    {
-        highScoreText = GameObject.Find("HighScore").GetComponent<Text>();
-
-        scoreText = GameObject.Find("Score").GetComponent<Text>();
-        scoreText.gameObject.SetActive(false);
-
-        timerText = GameObject.Find("Timer").GetComponent<Text>();
-
-        left = GameObject.Find("Left").GetComponent<Rigidbody2D>();
-        right = GameObject.Find("Right").GetComponent<Rigidbody2D>();
-
-        startButton = GameObject.Find("Start");
-
-        quitButton = GameObject.Find("Quit");
-        quitButton.gameObject.SetActive(false);
-
-        restartButton = GameObject.Find("Restart");
-        restartButton.gameObject.SetActive(false);
-
-        store = GameObject.Find("Store");
-        store.SetActive(false);
+            if(curTime <= 0)
+            {
+                Debug.Log("라운드 종료");
+                curTime = 0;
+                yield break;
+            }
+        }
     }
     #endregion
 }
