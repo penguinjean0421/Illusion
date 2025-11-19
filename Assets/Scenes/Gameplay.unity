@@ -1568,7 +1568,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Close
+  m_Text: Sold Out
 --- !u!222 &1097385597
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2726,7 +2726,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ball: {fileID: 1242723216870563048, guid: 5b83e35f1b7de7f488226cda7b693c98, type: 3}
   startPos: {x: 0.25, y: 7.2, z: 0}
-  time: 10
+  minScores: a086010000000000
+  time: 3
 --- !u!4 &1878655568
 Transform:
   m_ObjectHideFlags: 0

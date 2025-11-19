@@ -24,6 +24,8 @@ public class GameManager : MonoBehaviour
     GameObject storeCloseButton;
 
     // 점수
+    int level;
+    public int[] minScores;
     int score, highScore;
 
     // 타이머
@@ -123,7 +125,10 @@ public class GameManager : MonoBehaviour
                 Debug.Log("라운드 종료");
                 curTime = 0;
                 Time.timeScale = 0;
-                store.SetActive(true);
+
+                if (score >= minScores[level]) { store.SetActive(true); }
+                else { GameEnd(); }
+
                 yield break;
             }
         }
