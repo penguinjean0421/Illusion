@@ -100,7 +100,7 @@ public class GameManager : MonoBehaviour
     public void GameEnd()
     {
         Time.timeScale = 0;
-        // Destroy(spawnedBall);
+        Destroy(spawnedBall);
 
         if (score >= minScores[level])
         {
@@ -109,18 +109,26 @@ public class GameManager : MonoBehaviour
 
         else
         {
-            highScoreText.gameObject.SetActive(true);
-            quitButton.SetActive(true);
-            restartButton.SetActive(true);
-
-            if (score > highScore)
-            {
-                PlayerPrefs.SetInt("HighScore", score);
-                highScore = score;
-            }
-
-            highScoreText.text = $"HighScore : {highScore}";
+            GameOver();
         }
+    }
+
+    public void GameOver()
+    {
+        Time.timeScale = 0;
+        Destroy(spawnedBall);
+
+        highScoreText.gameObject.SetActive(true);
+        quitButton.SetActive(true);
+        restartButton.SetActive(true);
+
+        if (score > highScore)
+        {
+            PlayerPrefs.SetInt("HighScore", score);
+            highScore = score;
+        }
+
+        highScoreText.text = $"HighScore : {highScore}";
     }
 
     #region TimeCoroutine
@@ -157,8 +165,7 @@ public class GameManager : MonoBehaviour
 
         scoreText.gameObject.SetActive(true);
 
-        // spawnedBall = Instantiate(ball, startPos, Quaternion.identity);
-        Instantiate(ball, startPos, Quaternion.identity);
+        spawnedBall = Instantiate(ball, startPos, Quaternion.identity);
         isCanPlay = true;
         StartCoroutine(StartTimer());
     }
