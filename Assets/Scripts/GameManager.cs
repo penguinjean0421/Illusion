@@ -8,7 +8,11 @@ public class GameManager : MonoBehaviour
     public static GameManager instance { get; private set; }
 
     public GameObject ball;
+    GameObject spawnedBall;
+
     public Vector3 startPos;
+
+    public ScoreEffect scoreEffect;
 
     Rigidbody2D left, right;
 
@@ -21,7 +25,6 @@ public class GameManager : MonoBehaviour
 
     // 상점
     GameObject store;
-    GameObject storeCloseButton;
 
     // 점수
     int level;
@@ -82,6 +85,7 @@ public class GameManager : MonoBehaviour
             right.AddTorque(20f);
         }
 
+        if (Input.GetKeyDown(KeyCode.L)) { OnReset(); }
     }
 
     public void UpdateScore(int point, int mullIncrease)
@@ -89,23 +93,34 @@ public class GameManager : MonoBehaviour
         multiplier += mullIncrease;
         score += point * multiplier;
         scoreText.text = $"Score : {score}";
+        scoreEffect.ShowScore(transform.position, point);
         Debug.Log($"multiplier : {multiplier}");
     }
 
     public void GameEnd()
     {
         Time.timeScale = 0;
+        // Destroy(spawnedBall);
 
-        highScoreText.gameObject.SetActive(true);
-        quitButton.SetActive(true);
-        restartButton.SetActive(true);
-
-        if (score > highScore)
+        if (score >= minScores[level])
         {
-            PlayerPrefs.SetInt("HighScore", score);
-            highScore = score;
+            store.SetActive(true);
         }
-        highScoreText.text = $"HighScore : {highScore}";
+
+        else
+        {
+            highScoreText.gameObject.SetActive(true);
+            quitButton.SetActive(true);
+            restartButton.SetActive(true);
+
+            if (score > highScore)
+            {
+                PlayerPrefs.SetInt("HighScore", score);
+                highScore = score;
+            }
+
+            highScoreText.text = $"HighScore : {highScore}";
+        }
     }
 
     #region TimeCoroutine
@@ -126,8 +141,7 @@ public class GameManager : MonoBehaviour
                 curTime = 0;
                 Time.timeScale = 0;
 
-                if (score >= minScores[level]) { store.SetActive(true); }
-                else { GameEnd(); }
+                GameEnd();
 
                 yield break;
             }
@@ -143,6 +157,7 @@ public class GameManager : MonoBehaviour
 
         scoreText.gameObject.SetActive(true);
 
+        // spawnedBall = Instantiate(ball, startPos, Quaternion.identity);
         Instantiate(ball, startPos, Quaternion.identity);
         isCanPlay = true;
         StartCoroutine(StartTimer());
@@ -164,6 +179,12 @@ public class GameManager : MonoBehaviour
     public void StoreClose()
     {
         store.SetActive(false);
+    }
+
+    void OnReset()
+    {
+        PlayerPrefs.DeleteKey("HighScore");
+        Debug.Log("기록말살");
     }
     #endregion
 

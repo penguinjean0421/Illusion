@@ -12,14 +12,17 @@ public class Ball : MonoBehaviour
 
             case "Bouncer":
                 GameManager.instance.UpdateScore(10, 1);
+
                 break;
 
             case "Point":
                 GameManager.instance.UpdateScore(20, 1);
+
                 break;
 
             case "Side":
                 GameManager.instance.UpdateScore(10, 0);
+
                 break;
 
             case "Flipper":
