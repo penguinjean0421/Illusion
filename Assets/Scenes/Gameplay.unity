@@ -2820,9 +2820,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ball: {fileID: 1242723216870563048, guid: 5b83e35f1b7de7f488226cda7b693c98, type: 3}
   startPos: {x: 0.25, y: 7.2, z: 0}
-  scoreEffect: {fileID: 709629193}
-  minScores: c800000000000000
-  time: 50
+  scoreManager: {fileID: 709629193}
+  minScores: 640000002c010000
+  time: 3
 --- !u!4 &1878655568
 Transform:
   m_ObjectHideFlags: 0
