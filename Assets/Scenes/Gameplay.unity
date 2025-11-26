@@ -993,7 +993,7 @@ GameObject:
   - component: {fileID: 709629192}
   - component: {fileID: 709629193}
   m_Layer: 0
-  m_Name: ScoreEffect
+  m_Name: ScoreManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
