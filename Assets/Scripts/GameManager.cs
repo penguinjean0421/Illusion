@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
 
     public Vector3 startPos;
 
-    public ScoreEffect scoreEffect;
+    public ScoreManager scoreManager;
 
     Rigidbody2D left, right;
 
@@ -33,6 +33,7 @@ public class GameManager : MonoBehaviour
 
     // 타이머
     public float time;
+    // public float[] time; // Lv마다 다르게 할거면
     int minute, second;
     float curTime;
 
@@ -93,30 +94,29 @@ public class GameManager : MonoBehaviour
         multiplier += mullIncrease;
         score += point * multiplier;
         scoreText.text = $"Score : {score}";
-        scoreEffect.ShowScore(transform.position, point);
+        scoreManager.ShowScore(transform.position, point);
         Debug.Log($"multiplier : {multiplier}");
     }
 
     public void GameEnd()
     {
-        Time.timeScale = 0;
+        Time.timeScale = 0f;
         Destroy(spawnedBall);
 
-        if (score >= minScores[level])
+        if (curTime <= 0 && score >= minScores[level])
         {
+            LevelUp();
             store.SetActive(true);
         }
-
         else
         {
             GameOver();
         }
     }
 
-    public void GameOver()
+    void GameOver()
     {
-        Time.timeScale = 0;
-        Destroy(spawnedBall);
+        isCanPlay = false;
 
         highScoreText.gameObject.SetActive(true);
         quitButton.SetActive(true);
@@ -135,6 +135,8 @@ public class GameManager : MonoBehaviour
     IEnumerator StartTimer()
     {
         curTime = time;
+        /* curTime = time[level]; */ // Lv마다 다르게 할거면 이걸로 변경
+
         while (curTime > 0)
         {
             curTime -= Time.deltaTime;
@@ -147,13 +149,17 @@ public class GameManager : MonoBehaviour
             {
                 Debug.Log("라운드 종료");
                 curTime = 0;
-                Time.timeScale = 0;
+                Time.timeScale = 0f;
 
                 GameEnd();
-
                 yield break;
             }
         }
+    }
+
+    void LevelUp()
+    {
+        level++;
     }
     #endregion
 
@@ -186,6 +192,9 @@ public class GameManager : MonoBehaviour
     public void StoreClose()
     {
         store.SetActive(false);
+        spawnedBall = Instantiate(ball, startPos, Quaternion.identity);
+        Time.timeScale = 1f;
+        StartCoroutine(StartTimer());
     }
 
     void OnReset()

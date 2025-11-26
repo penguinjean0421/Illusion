@@ -7,7 +7,7 @@ public class Ball : MonoBehaviour
         switch (collision.gameObject.tag)
         {
             case "Dead":
-                GameManager.instance.GameOver();
+                GameManager.instance.GameEnd();
                 break;
 
             case "Bouncer":

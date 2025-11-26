@@ -1,5 +1,5 @@
 using UnityEngine;
-public class ScoreEffect : MonoBehaviour
+public class ScoreManager : MonoBehaviour
 {
     public GameObject textEffectPrefab;
     public Transform canvasTransform;
