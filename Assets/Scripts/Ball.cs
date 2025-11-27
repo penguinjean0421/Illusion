@@ -1,10 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Ball : MonoBehaviour
 {
-    private void OnCollisionEnter2D(Collision2D collision)
+    void OnCollisionEnter2D(Collision2D collision)
     {
         switch (collision.gameObject.tag)
         {
@@ -14,14 +12,17 @@ public class Ball : MonoBehaviour
 
             case "Bouncer":
                 GameManager.instance.UpdateScore(10, 1);
+
                 break;
 
             case "Point":
                 GameManager.instance.UpdateScore(20, 1);
+
                 break;
 
             case "Side":
                 GameManager.instance.UpdateScore(10, 0);
+
                 break;
 
             case "Flipper":
