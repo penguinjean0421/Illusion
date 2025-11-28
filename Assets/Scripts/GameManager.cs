@@ -1,5 +1,5 @@
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.UI; // 💡 (슬라이더/UI 컴포넌트 사용을 위해 추가)
 using UnityEngine.SceneManagement;
 using System.Collections;
 using Unity.VisualScripting;
@@ -24,6 +24,9 @@ public class GameManager : MonoBehaviour
     GameObject restartButton;
     Text highScoreText, scoreText;
     Text timerText;
+
+    // 💡 (슬라이더 UI 컴포넌트를 에디터에서 연결하기 위해 추가)
+    public Slider chargeGauge; 
 
     // 상점
     GameObject store;
@@ -79,9 +82,10 @@ public class GameManager : MonoBehaviour
 
     int tempPoint = 1;
 
-    void Update()
+
+    public void Slider()
     {
-        if (!isCanPlay) { return; }
+        if (!isCanPlay) { return; } 
 
         if (Input.GetKey(KeyCode.Space) && canLaunched)
         {
@@ -89,11 +93,13 @@ public class GameManager : MonoBehaviour
             
              if (curForce >= Max)
             {
-                tempPoint = 1;
+                // Max에 도달하면 방향을 바꿔서 힘을 감소시킴
+                tempPoint = 1; 
             }
             else if (curForce <= Min)
             {
-                tempPoint = -1;
+                // Min에 도달하면 방향을 바꿔서 힘을 증가시킴
+                tempPoint = -1; 
             }
 
 
@@ -108,9 +114,25 @@ public class GameManager : MonoBehaviour
                 curForce += 16f * Time.deltaTime;
             }
 
+            // 💡 (슬라이더의 값이 Min/Max 범위를 벗어나지 않도록 강제로 고정)
+            curForce = Mathf.Clamp(curForce, Min, Max); 
             
-
+            // 💡 (현재 curForce 값을 슬라이더의 value에 반영하여 UI 업데이트)
+            if (chargeGauge != null)
+            {
+                chargeGauge.value = curForce;
+            }
+            
         }
+    }
+
+    void Update()
+    {
+        if (!isCanPlay) { return; }
+
+        // 💡 (매 프레임마다 Slider 게이지 충전/방전 로직을 실행하도록 호출)
+        Slider(); 
+        
         if (Input.GetKeyUp(KeyCode.Space) && canLaunched)
         {
             
@@ -257,6 +279,14 @@ public class GameManager : MonoBehaviour
     {
         Rigidbody2D ballRb = spawnedBall.GetComponent<Rigidbody2D>();
         ballRb.AddForce(Vector2.up * curForce,ForceMode2D.Impulse);
+        // 발사 후 게이지 초기 위치로 돌리기
+        curForce = Min + 1f; 
+        
+        // UI도 초기화 (Launch는 Update 바깥에서 호출될 가능성이 높으므로 명시적으로 업데이트)
+        if (chargeGauge != null)
+        {
+            chargeGauge.value = curForce;
+        }
     }
 
     #endregion
@@ -284,6 +314,21 @@ public class GameManager : MonoBehaviour
 
         store = GameObject.Find("Store");
         store.SetActive(false);
+        
+        // 💡 (Slider UI를 Hierarchy에서 찾아 연결)
+        GameObject gaugeObject = GameObject.Find("ChargeSlider"); // Hierarchy의 Slider 이름으로 변경하세요.
+        if (gaugeObject != null)
+        {
+            chargeGauge = gaugeObject.GetComponent<Slider>();
+            
+            if (chargeGauge != null)
+            {
+                // 💡 (Slider의 Min/Max 값을 curForce의 Min/Max 값과 일치시키도록 설정)
+                chargeGauge.minValue = Min; 
+                chargeGauge.maxValue = Max; 
+                chargeGauge.value = curForce;
+            }
+        }
     }
     #endregion
 
