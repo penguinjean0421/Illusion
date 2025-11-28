@@ -2,6 +2,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.Collections;
+using Unity.VisualScripting;
+using UnityEngine.Rendering;
 
 public class GameManager : MonoBehaviour
 {
@@ -10,7 +12,7 @@ public class GameManager : MonoBehaviour
     public GameObject ball;
     GameObject spawnedBall;
 
-    public Vector3 startPos;
+    public GameObject startPos;
 
     public ScoreManager scoreManager;
 
@@ -31,6 +33,14 @@ public class GameManager : MonoBehaviour
     public int[] minScores;
     int score, highScore;
 
+
+
+    float Max = 45f;
+    float Min = 21f;
+
+    [SerializeField]
+    float curForce;
+
     // 타이머
     public float time;
     // public float[] time; // Lv마다 다르게 할거면
@@ -39,6 +49,8 @@ public class GameManager : MonoBehaviour
 
     internal int multiplier;
     bool isCanPlay;
+
+    public bool canLaunched = false;
 
     void Awake()
     {
@@ -62,15 +74,53 @@ public class GameManager : MonoBehaviour
         highScore = PlayerPrefs.HasKey("HighScore") ? PlayerPrefs.GetInt("HighScore") : 0;
         highScoreText.text = $"HighScore : {highScore}";
         isCanPlay = false;
+        curForce = Min + 1f;
     }
+
+    int tempPoint = 1;
 
     void Update()
     {
         if (!isCanPlay) { return; }
 
+        if (Input.GetKey(KeyCode.Space) && canLaunched)
+        {
+
+            
+             if (curForce >= Max)
+            {
+                tempPoint = 1;
+            }
+            else if (curForce <= Min)
+            {
+                tempPoint = -1;
+            }
+
+
+            // charge sibal nom a
+            if (tempPoint ==1)
+            {
+                
+                curForce -= 16f * Time.deltaTime;
+            }
+            else if (tempPoint == -1)
+            {
+                curForce += 16f * Time.deltaTime;
+            }
+
+            
+
+        }
+        if (Input.GetKeyUp(KeyCode.Space) && canLaunched)
+        {
+            
+            Launch();
+            canLaunched = false;
+        }
+
         if (Input.GetKey(KeyCode.A))
         {
-            left.AddTorque(25f);
+            left.AddTorque(50f);
         }
         else
         {
@@ -79,7 +129,7 @@ public class GameManager : MonoBehaviour
 
         if (Input.GetKey(KeyCode.D))
         {
-            right.AddTorque(-25f);
+            right.AddTorque(-50f);
         }
         else
         {
@@ -171,7 +221,7 @@ public class GameManager : MonoBehaviour
 
         scoreText.gameObject.SetActive(true);
 
-        spawnedBall = Instantiate(ball, startPos, Quaternion.identity);
+        spawnedBall = Instantiate(ball, startPos.transform.position, Quaternion.identity);
         isCanPlay = true;
         StartCoroutine(StartTimer());
     }
@@ -192,7 +242,7 @@ public class GameManager : MonoBehaviour
     public void StoreClose()
     {
         store.SetActive(false);
-        spawnedBall = Instantiate(ball, startPos, Quaternion.identity);
+        spawnedBall = Instantiate(ball, startPos.transform.position, Quaternion.identity);
         Time.timeScale = 1f;
         StartCoroutine(StartTimer());
     }
@@ -202,6 +252,13 @@ public class GameManager : MonoBehaviour
         PlayerPrefs.DeleteKey("HighScore");
         Debug.Log("기록말살");
     }
+
+    void Launch()
+    {
+        Rigidbody2D ballRb = spawnedBall.GetComponent<Rigidbody2D>();
+        ballRb.AddForce(Vector2.up * curForce,ForceMode2D.Impulse);
+    }
+
     #endregion
 
     #region Initialize
@@ -229,4 +286,7 @@ public class GameManager : MonoBehaviour
         store.SetActive(false);
     }
     #endregion
+
+
+    
 }
