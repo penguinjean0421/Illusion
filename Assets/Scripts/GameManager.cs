@@ -7,6 +7,8 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance { get; private set; }
 
+    public FadeEffect fadeEffect;
+
     public GameObject ball;
     GameObject spawnedBall;
 
@@ -117,6 +119,11 @@ public class GameManager : MonoBehaviour
     void GameOver()
     {
         isCanPlay = false;
+
+        if (fadeEffect != null)
+        {
+            fadeEffect.StartGameOverEffect();
+        }
 
         highScoreText.gameObject.SetActive(true);
         quitButton.SetActive(true);
