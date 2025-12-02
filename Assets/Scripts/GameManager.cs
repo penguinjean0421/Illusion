@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
     public FadeEffect fadeEffect;
 
     public GameObject ball;
-    GameObject spawnedBall;
+    public GameObject spawnedBall;
 
     public GameObject startPos;
 
@@ -101,11 +101,11 @@ public class GameManager : MonoBehaviour
             if (tempPoint == 1)
             {
 
-                curForce -= 16f * Time.deltaTime;
+                curForce -= 25f * Time.deltaTime;
             }
             else if (tempPoint == -1)
             {
-                curForce += 16f * Time.deltaTime;
+                curForce += 25f * Time.deltaTime;
             }
 
             // 💡 (슬라이더의 값이 Min/Max 범위를 벗어나지 않도록 강제로 고정)
@@ -142,7 +142,7 @@ public class GameManager : MonoBehaviour
             left.AddTorque(-20f);
         }
 
-        if (Input.GetKey(KeyCode.D))
+        if (Input.GetKey(KeyCode.L))
         {
             right.AddTorque(-50f);
         }
@@ -151,7 +151,7 @@ public class GameManager : MonoBehaviour
             right.AddTorque(20f);
         }
 
-        if (Input.GetKeyDown(KeyCode.L)) { OnReset(); }
+        if (Input.GetKeyDown(KeyCode.R)) { OnReset(); }
     }
 
     public void UpdateScore(int point, int mullIncrease)
@@ -268,7 +268,7 @@ public class GameManager : MonoBehaviour
         StartCoroutine(StartTimer());
     }
 
-    void Launch()
+     void Launch()
     {
         Rigidbody2D ballRb = spawnedBall.GetComponent<Rigidbody2D>();
         ballRb.AddForce(Vector2.up * curForce, ForceMode2D.Impulse);

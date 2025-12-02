@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class Ball : MonoBehaviour
@@ -46,6 +47,13 @@ public class Ball : MonoBehaviour
             GameManager.instance.UpdateScore(30, 0);
         }
 
+        if (collision.gameObject.tag == "Blocker")
+        {
+
+            StartCoroutine(WaitForSeconds(1.8f));
+            Rigidbody2D ballRb = GetComponent<Rigidbody2D>();
+            ballRb.AddForce(Vector2.up * 10f, ForceMode2D.Impulse);
+        }
 
 
         if (collision.gameObject.tag == "StartPoint")
@@ -54,6 +62,13 @@ public class Ball : MonoBehaviour
         }
 
         
+    }
+
+
+
+    IEnumerator WaitForSeconds(float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
     }
 }
 

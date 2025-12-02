@@ -11,6 +11,7 @@ TagManager:
   - StartPoint
   - Point2
   - Tunnel
+  - Blocker
   layers:
   - Default
   - TransparentFX
