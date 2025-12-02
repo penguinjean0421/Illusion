@@ -12,6 +12,7 @@ TagManager:
   - Point2
   - Tunnel
   - Blocker
+  - WormHole
   layers:
   - Default
   - TransparentFX
