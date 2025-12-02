@@ -2,8 +2,6 @@ using UnityEngine;
 using UnityEngine.UI; // 💡 (슬라이더/UI 컴포넌트 사용을 위해 추가)
 using UnityEngine.SceneManagement;
 using System.Collections;
-using Unity.VisualScripting;
-using UnityEngine.Rendering;
 
 public class GameManager : MonoBehaviour
 {
@@ -49,9 +47,6 @@ public class GameManager : MonoBehaviour
     int minute, second;
     float curTime;
 
-    // 스타트 딜레이
-    public float delayTime = 3f; // 딜레이
-
     internal int multiplier;
     bool isCanPlay;
 
@@ -83,7 +78,6 @@ public class GameManager : MonoBehaviour
     }
 
     int tempPoint = 1;
-
 
     public void Slider()
     {
@@ -122,7 +116,6 @@ public class GameManager : MonoBehaviour
             {
                 chargeGauge.value = curForce;
             }
-
         }
     }
 
@@ -232,10 +225,6 @@ public class GameManager : MonoBehaviour
                 yield break;
             }
         }
-    }
-    IEnumerator StartDelay()
-    {
-        yield return null;
     }
 
     #endregion
