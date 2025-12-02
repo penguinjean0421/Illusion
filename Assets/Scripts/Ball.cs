@@ -33,4 +33,14 @@ public class Ball : MonoBehaviour
                 break;
         }
     }
+
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "StartPoint")
+        {
+            GameManager.instance.canLaunched = true;
+        }
+    }
 }
+
+
