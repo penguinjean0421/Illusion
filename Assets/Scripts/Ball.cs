@@ -11,12 +11,17 @@ public class Ball : MonoBehaviour
                 break;
 
             case "Bouncer":
-                GameManager.instance.UpdateScore(10, 1);
+                GameManager.instance.UpdateScore(10, 0);
 
                 break;
 
             case "Point":
-                GameManager.instance.UpdateScore(20, 1);
+                GameManager.instance.UpdateScore(20, 0);
+
+                break;
+
+            case "Point2":
+                GameManager.instance.UpdateScore(30, 0);
 
                 break;
 
@@ -36,10 +41,19 @@ public class Ball : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
+        if (collision.gameObject.tag == "Tunnel")
+        {
+            GameManager.instance.UpdateScore(30, 0);
+        }
+
+
+
         if (collision.gameObject.tag == "StartPoint")
         {
-            GameManager.instance.canLaunched = true;
+            GameManager.instance.isCanLaunched = true;
         }
+
+        
     }
 }
 

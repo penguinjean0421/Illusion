@@ -9,6 +9,8 @@ TagManager:
   - Bouncer
   - Dead
   - StartPoint
+  - Point2
+  - Tunnel
   layers:
   - Default
   - TransparentFX

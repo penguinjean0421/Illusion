@@ -6,7 +6,7 @@ public class ScoreManager : MonoBehaviour
 
     public void ShowScore(Vector3 worldPosition, int score)
     {
-        Debug.Log("ㅇ?");
+        //Debug.Log("ㅇ?");
 
         // 화면 좌표로 변환
         Vector3 screenPos = Vector3.zero; // (위치 사이드로 변경 요망)
