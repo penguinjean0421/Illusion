@@ -35,6 +35,10 @@ public class Ball : MonoBehaviour
                 GameManager.instance.multiplier = 1;
                 break;
 
+            case "Blocker":
+                StartCoroutine(BlockerJump());
+                break;
+
             default:
                 break;
         }
@@ -47,13 +51,7 @@ public class Ball : MonoBehaviour
             GameManager.instance.UpdateScore(30, 0);
         }
 
-        if (collision.gameObject.tag == "Blocker")
-        {
-
-            StartCoroutine(WaitForSeconds(1.8f));
-            Rigidbody2D ballRb = GetComponent<Rigidbody2D>();
-            ballRb.AddForce(Vector2.up * 10f, ForceMode2D.Impulse);
-        }
+        
 
 
         if (collision.gameObject.tag == "StartPoint")
@@ -66,9 +64,11 @@ public class Ball : MonoBehaviour
 
 
 
-    IEnumerator WaitForSeconds(float seconds)
+    IEnumerator BlockerJump() 
     {
-        yield return new WaitForSeconds(seconds);
+        yield return new WaitForSeconds(1f);
+        GameManager.instance.Launch();
+        //Debug.Log("발사했어요 ㅅㅂ");
     }
 }
 

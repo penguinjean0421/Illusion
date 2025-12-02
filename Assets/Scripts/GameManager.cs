@@ -268,7 +268,7 @@ public class GameManager : MonoBehaviour
         StartCoroutine(StartTimer());
     }
 
-     void Launch()
+    public void Launch()
     {
         Rigidbody2D ballRb = spawnedBall.GetComponent<Rigidbody2D>();
         ballRb.AddForce(Vector2.up * curForce, ForceMode2D.Impulse);
