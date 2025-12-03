@@ -8,7 +8,8 @@ public class ItemData : ScriptableObject
     {
         Consumable, // 소모품
         Equipment,  // 장비
-        Currency    // 재화
+        Currency,    // 재화
+        Upgrade
     }
 
     // 상점에 표시될 정보

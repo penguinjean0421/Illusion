@@ -51,17 +51,13 @@ public class Ball : MonoBehaviour
             GameManager.instance.UpdateScore(30, 0);
         }
 
-        
-
         if (collision.gameObject.tag == "StartPoint")
         {
             GameManager.instance.isCanLaunched = true;
         }
-
-        
     }
 
-    IEnumerator BlockerJump() 
+    IEnumerator BlockerJump()
     {
         yield return new WaitForSeconds(1f);
         GameManager.instance.Launch();

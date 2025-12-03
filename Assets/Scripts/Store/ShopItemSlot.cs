@@ -14,7 +14,7 @@ public class ShopItemSlot : MonoBehaviour
     // 구매 이벤트가 발생했을 때 호출할 델리게이트 (ItemID를 넘겨줍니다)
     public Action<string> OnBuyButtonClicked;
 
-    private ItemData currentItemData;
+    ItemData currentItemData;
 
     public void SetItemData(ItemData data)
     {

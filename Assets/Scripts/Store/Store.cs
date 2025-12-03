@@ -12,7 +12,7 @@ public class Store : MonoBehaviour
     public Transform contentParent;        // 아이템 슬롯들이 생성될 부모 Transform (ScrollView Content)
 
     // ********** 시뮬레이션 데이터 **********
-    private int playerGold = 500; // 현재 플레이어의 골드
+    int playerGold = 500; // 현재 플레이어의 골드
     // ****************************************
 
     void Start()
@@ -21,7 +21,7 @@ public class Store : MonoBehaviour
         SetupShopUI();
     }
 
-    private void SetupShopUI()
+    void SetupShopUI()
     {
         // 기존의 슬롯이 있다면 모두 제거 (상점 갱신 시 유용)
         foreach (Transform child in contentParent)
@@ -51,7 +51,7 @@ public class Store : MonoBehaviour
     /// 아이템 구매를 처리하는 핵심 로직
     /// </summary>
     /// <param name="itemID">구매할 아이템의 ID</param>
-    private void BuyItem(string itemID)
+    void BuyItem(string itemID)
     {
         // 1. 아이템 데이터 조회
         ItemData itemToBuy = allShopItems.Find(item => item.itemID == itemID);
@@ -72,11 +72,21 @@ public class Store : MonoBehaviour
             Debug.Log($"**구매 성공**: {itemToBuy.itemName}을(를) {itemToBuy.price} 골드로 구매했습니다.");
             Debug.Log($"남은 골드: {playerGold}");
 
-            // TODO: 여기에 실제 인벤토리에 아이템을 추가하는 로직을 구현하세요.
-            // if (itemToBuy.Type == ItemData.ItemType.Consumable)
-            // {
-            //     InventoryManager.Instance.AddItem(itemToBuy.ItemID, 1);
-            // }
+            if (itemToBuy.Type == ItemData.ItemType.Currency)
+            {
+                // A. 즉시 재화 지급 (예: 다이아몬드 100개 지급)
+                // CurrencyManager.Instance.AddDiamond(100);
+            }
+            else if (itemToBuy.Type == ItemData.ItemType.Consumable)
+            {
+                // B. 소모품 인벤토리에 추가 (실제 사용은 나중에)
+                // InventoryManager.Instance.AddItem(itemToBuy.ItemID, 1);
+            }
+            else if (itemToBuy.Type == ItemData.ItemType.Upgrade)
+            {
+                // C. 영구적인 업그레이드 적용 (예: 최대 체력 영구 증가)
+                // PlayerStatsManager.Instance.ApplyPermanentUpgrade(itemToBuy.ItemID);
+            }
 
             // 구매 후 UI 갱신 (선택 사항: 재화 표시 등)
             UpdatePlayerCurrencyUI();
@@ -89,7 +99,7 @@ public class Store : MonoBehaviour
     }
 
     // 예시 함수: 플레이어 재화 UI 업데이트 (실제 UI 텍스트 업데이트 로직)
-    private void UpdatePlayerCurrencyUI()
+    void UpdatePlayerCurrencyUI()
     {
         // TODO: 게임 내 재화 표시 UI를 업데이트하는 코드를 여기에 작성하세요.
         // 예를 들어: UIManager.Instance.UpdateGoldText(playerGold);
