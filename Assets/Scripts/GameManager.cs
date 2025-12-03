@@ -168,14 +168,14 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 0f;
         Destroy(spawnedBall);
 
-        if (curTime <= 0 && score >= minScores[level])
+        if (curTime > 0 || score < minScores[level])
         {
-            LevelUp();
-            store.SetActive(true);
+            GameOver();
         }
         else
         {
-            GameOver();
+            LevelUp();
+            store.SetActive(true);
         }
     }
 
