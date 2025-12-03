@@ -53,7 +53,6 @@ public class Ball : MonoBehaviour
 
         
 
-
         if (collision.gameObject.tag == "StartPoint")
         {
             GameManager.instance.isCanLaunched = true;
@@ -61,8 +60,6 @@ public class Ball : MonoBehaviour
 
         
     }
-
-
 
     IEnumerator BlockerJump() 
     {

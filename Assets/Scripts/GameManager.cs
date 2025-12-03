@@ -1,5 +1,5 @@
 using UnityEngine;
-using UnityEngine.UI; // 💡 (슬라이더/UI 컴포넌트 사용을 위해 추가)
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.Collections;
 
@@ -68,7 +68,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        Time.timeScale = 1;
+        Time.timeScale = 1f;
         score = 0;
         multiplier = 1;
         highScore = PlayerPrefs.HasKey("HighScore") ? PlayerPrefs.GetInt("HighScore") : 0;
@@ -258,6 +258,18 @@ public class GameManager : MonoBehaviour
     public void GameRestart()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+
+        // 다시 시작 누르면 씬 재로딩 하지말고 게임이 다시 시작되게 해도 될거 같은데 님들 생각은 어떰?
+        /* 
+        highScoreText.gameObject.SetActive(false);
+        restartButton.gameObject.SetActive(false);
+        level = 0;
+        score = 0;
+        spawnedBall = Instantiate(ball, startPos.transform.position, Quaternion.identity);
+        Time.timeScale = 1f;
+        isCanPlay = true;
+        StartCoroutine(StartTimer()); 
+        */
     }
 
     public void StoreClose()
