@@ -11,9 +11,7 @@ public class Store : MonoBehaviour
     public GameObject shopItemSlotPrefab; // ShopItemSlot 스크립트가 붙은 프리팹
     public Transform contentParent;        // 아이템 슬롯들이 생성될 부모 Transform (ScrollView Content)
 
-    // ********** 시뮬레이션 데이터 **********
     int playerGold = 500; // 현재 플레이어의 골드
-    // ****************************************
 
     void Start()
     {
@@ -72,20 +70,29 @@ public class Store : MonoBehaviour
             Debug.Log($"**구매 성공**: {itemToBuy.itemName}을(를) {itemToBuy.price} 골드로 구매했습니다.");
             Debug.Log($"남은 골드: {playerGold}");
 
-            if (itemToBuy.Type == ItemData.ItemType.Currency)
+            switch (itemToBuy.Type)
             {
-                // A. 즉시 재화 지급 (예: 다이아몬드 100개 지급)
-                // CurrencyManager.Instance.AddDiamond(100);
-            }
-            else if (itemToBuy.Type == ItemData.ItemType.Consumable)
-            {
-                // B. 소모품 인벤토리에 추가 (실제 사용은 나중에)
-                // InventoryManager.Instance.AddItem(itemToBuy.ItemID, 1);
-            }
-            else if (itemToBuy.Type == ItemData.ItemType.Upgrade)
-            {
-                // C. 영구적인 업그레이드 적용 (예: 최대 체력 영구 증가)
-                // PlayerStatsManager.Instance.ApplyPermanentUpgrade(itemToBuy.ItemID);
+                case (ItemData.ItemType.Currency):
+                    // A. 즉시 재화 지급 (예: 다이아몬드 100개 지급)
+                    // CurrencyManager.Instance.AddDiamond(100);
+                    Debug.Log($"{itemToBuy.Type} 타입 아이템 {itemToBuy.itemName}을 구매하였다.");
+                    break;
+                case (ItemData.ItemType.Consumable):
+                    // B. 소모품 인벤토리에 추가 (실제 사용은 나중에)
+                    // InventoryManager.Instance.AddItem(itemToBuy.ItemID, 1);
+                    Debug.Log($"{itemToBuy.Type} 타입 아이템 {itemToBuy.itemName}을 구매하였다.");
+                    break;
+                case (ItemData.ItemType.Upgrade):
+                    // C. 영구적인 업그레이드 적용 (예: 최대 체력 영구 증가)
+                    // PlayerStatsManager.Instance.ApplyPermanentUpgrade(itemToBuy.ItemID);
+                    Debug.Log($"{itemToBuy.Type} 타입 아이템 {itemToBuy.itemName}을 구매하였다.");
+                    break;
+                case (ItemData.ItemType.Test):
+                    Debug.Log($"{itemToBuy.Type} 타입 아이템 {itemToBuy.itemName}을 구매하였다.");
+                    break;
+                default:
+                    Debug.Log("접근 불가");
+                    break;
             }
 
             // 구매 후 UI 갱신 (선택 사항: 재화 표시 등)
