@@ -24,7 +24,7 @@ public class ShopItemSlot : MonoBehaviour
         iconImage.sprite = data.itemIcon;
         nameText.text = data.itemName;
         descriptionText.text = data.itemDescription;
-        priceText.text = data.price.ToString() + " G";
+        priceText.text = data.price.ToString() + " G\n Buy";
 
         // 구매 버튼 이벤트 연결
         // 버튼 클릭 시 외부(ShopManager)에 이 아이템의 ID로 구매 요청을 보냅니다.
