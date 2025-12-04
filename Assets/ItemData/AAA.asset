@@ -15,6 +15,6 @@ MonoBehaviour:
   Type: 0
   itemID: 111
   itemName: DOBU
-  itemDescription: "\uC544 \uC885\uAC15 \uC6D0\uD574"
+  itemDescription: Test ment
   price: 100
   itemIcon: {fileID: 5142870381175752398, guid: 65140fd9f0fb5424d99100f8252cb26f, type: 3}

@@ -42,6 +42,7 @@ public class Store : MonoBehaviour
             slot.OnBuyButtonClicked += BuyItem;
         }
 
+        UpdatePlayerCurrencyUI();
         Debug.Log("상점 UI 로드 완료. 현재 골드: " + playerGold);
     }
 
@@ -110,5 +111,7 @@ public class Store : MonoBehaviour
     {
         // TODO: 게임 내 재화 표시 UI를 업데이트하는 코드를 여기에 작성하세요.
         // 예를 들어: UIManager.Instance.UpdateGoldText(playerGold);
+
+        GameManager.instance.MoneyUpdate(playerGold);
     }
 }
