@@ -25,7 +25,6 @@ public class GameManager : MonoBehaviour
     Text highScoreText, scoreText;
     Text timerText;
 
-
     // (슬라이더 UI 컴포넌트를 에디터에서 연결하기 위해 추가)
     public Slider chargeGauge;
     float Max = 45f;
@@ -77,7 +76,6 @@ public class GameManager : MonoBehaviour
         highScore = PlayerPrefs.HasKey("HighScore") ? PlayerPrefs.GetInt("HighScore") : 0;
         highScoreText.text = $"HighScore : {highScore}";
         isCanPlay = false;
-
         curForce = Min + 1f;
     }
 
@@ -121,7 +119,6 @@ public class GameManager : MonoBehaviour
                 chargeGauge.value = curForce;
             }
         }
-
     }
 
     void Update()
@@ -134,7 +131,7 @@ public class GameManager : MonoBehaviour
 
         //if(SceneManager.GetActiveScene().name == "Tutorial")
         {
-            if(Input.GetKeyDown(KeyCode.Escape))
+            if (Input.GetKeyDown(KeyCode.Escape))
             {
                 EndTutorial();
             }
