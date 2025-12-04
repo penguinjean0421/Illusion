@@ -52,6 +52,9 @@ public class GameManager : MonoBehaviour
 
     public bool isCanLaunched = false;
 
+    // store
+    Text goldUI;
+
     void Awake()
     {
         if (instance == null)
@@ -293,7 +296,6 @@ public class GameManager : MonoBehaviour
             chargeGauge.value = curForce;
         }
     }
-
     #endregion
 
     #region Initialize
@@ -318,14 +320,25 @@ public class GameManager : MonoBehaviour
         restartButton.gameObject.SetActive(false);
 
         store = GameObject.Find("Store");
+        goldUI = GameObject.Find("Gold").GetComponent<Text>();
         store.SetActive(false);
 
         chargeGauge = GameObject.Find("ChargeSlider").GetComponent<Slider>();
         chargeGauge.minValue = Min;
         chargeGauge.maxValue = Max;
         chargeGauge.value = curForce;
+
+
     }
     #endregion
+
+    #region UI
+    public void MoneyUpdate(int money)
+    {
+        goldUI.text = $"Gold : {money}";
+    }
+    #endregion
+
 
     #region Developer Cheat
     void OnReset()
