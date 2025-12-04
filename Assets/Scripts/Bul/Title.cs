@@ -27,4 +27,6 @@ public class Title : MonoBehaviour
     {
         SceneManager.LoadScene("GamePlay");
     }
+
+    // 테스트 버전
 }
