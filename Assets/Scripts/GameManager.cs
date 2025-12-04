@@ -25,7 +25,8 @@ public class GameManager : MonoBehaviour
     Text highScoreText, scoreText;
     Text timerText;
 
-    // 💡 (슬라이더 UI 컴포넌트를 에디터에서 연결하기 위해 추가)
+
+    // (슬라이더 UI 컴포넌트를 에디터에서 연결하기 위해 추가)
     public Slider chargeGauge;
     float Max = 45f;
     float Min = 21f;
@@ -76,6 +77,7 @@ public class GameManager : MonoBehaviour
         highScore = PlayerPrefs.HasKey("HighScore") ? PlayerPrefs.GetInt("HighScore") : 0;
         highScoreText.text = $"HighScore : {highScore}";
         isCanPlay = false;
+
         curForce = Min + 1f;
     }
 
@@ -119,10 +121,30 @@ public class GameManager : MonoBehaviour
                 chargeGauge.value = curForce;
             }
         }
+
     }
 
     void Update()
     {
+
+
+        #region 
+
+
+
+        //if(SceneManager.GetActiveScene().name == "Tutorial")
+        {
+            if(Input.GetKeyDown(KeyCode.Escape))
+            {
+                EndTutorial();
+            }
+        }
+
+
+        #endregion
+
+
+
         if (!isCanPlay) { return; }
 
         // 💡 (매 프레임마다 Slider 게이지 충전/방전 로직을 실행하도록 호출)
@@ -137,20 +159,20 @@ public class GameManager : MonoBehaviour
 
         if (Input.GetKey(KeyCode.A))
         {
-            left.AddTorque(50f);
+            left.AddTorque(1200f);
         }
         else
         {
-            left.AddTorque(-20f);
+            left.AddTorque(-500f);
         }
 
-        if (Input.GetKey(KeyCode.L) || Input.GetKey(KeyCode.D))
+        if (Input.GetKey(KeyCode.L))
         {
-            right.AddTorque(-50f);
+            right.AddTorque(-1200f);
         }
         else
         {
-            right.AddTorque(20f);
+            right.AddTorque(500f);
         }
 
         if (Input.GetKeyDown(KeyCode.R)) { OnReset(); }
@@ -274,6 +296,8 @@ public class GameManager : MonoBehaviour
         */
     }
 
+
+
     public void StoreClose()
     {
         store.SetActive(false);
@@ -294,9 +318,14 @@ public class GameManager : MonoBehaviour
         {
             chargeGauge.value = curForce;
         }
-
         Debug.Log($"Rb : {ballRb.velocity}");
     }
+
+    public void EndTutorial()
+    {
+        SceneManager.LoadScene("Title");
+    }
+
     #endregion
 
     #region UI
