@@ -25,8 +25,6 @@ public class GameManager : MonoBehaviour
     Text highScoreText, scoreText;
     Text timerText;
 
-<<<<<<< Updated upstream
-=======
     // (슬라이더 UI 컴포넌트를 에디터에서 연결하기 위해 추가)
     public Slider chargeGauge;
     float Max = 45f;
@@ -35,7 +33,6 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     float curForce;
 
->>>>>>> Stashed changes
     // 상점
     GameObject store;
 
@@ -75,8 +72,6 @@ public class GameManager : MonoBehaviour
         highScore = PlayerPrefs.HasKey("HighScore") ? PlayerPrefs.GetInt("HighScore") : 0;
         highScoreText.text = $"HighScore : {highScore}";
         isCanPlay = false;
-<<<<<<< Updated upstream
-=======
         curForce = Min + 1f;
     }
 
@@ -120,7 +115,6 @@ public class GameManager : MonoBehaviour
                 chargeGauge.value = curForce;
             }
         }
->>>>>>> Stashed changes
     }
 
     void Update()
@@ -133,7 +127,7 @@ public class GameManager : MonoBehaviour
 
         //if(SceneManager.GetActiveScene().name == "Tutorial")
         {
-            if(Input.GetKeyDown(KeyCode.Escape))
+            if (Input.GetKeyDown(KeyCode.Escape))
             {
                 EndTutorial();
             }
@@ -148,26 +142,16 @@ public class GameManager : MonoBehaviour
 
         if (Input.GetKey(KeyCode.A))
         {
-<<<<<<< Updated upstream
-            left.AddTorque(25f);
-=======
             left.AddTorque(1200f);
->>>>>>> Stashed changes
         }
         else
         {
             left.AddTorque(-500f);
         }
 
-<<<<<<< Updated upstream
-        if (Input.GetKey(KeyCode.D))
-        {
-            right.AddTorque(-25f);
-=======
         if (Input.GetKey(KeyCode.L))
         {
             right.AddTorque(-1200f);
->>>>>>> Stashed changes
         }
         else
         {
@@ -294,10 +278,6 @@ public class GameManager : MonoBehaviour
 
     void OnReset()
     {
-<<<<<<< Updated upstream
-        PlayerPrefs.DeleteKey("HighScore");
-        Debug.Log("기록말살");
-=======
         Rigidbody2D ballRb = spawnedBall.GetComponent<Rigidbody2D>();
         ballRb.AddForce(Vector2.up * curForce, ForceMode2D.Impulse);
         // 발사 후 게이지 초기 위치로 돌리기
@@ -328,7 +308,6 @@ public class GameManager : MonoBehaviour
     public void BuyItem(string name)
     {
         bought.text = $"{name} 구매";
->>>>>>> Stashed changes
     }
     #endregion
 

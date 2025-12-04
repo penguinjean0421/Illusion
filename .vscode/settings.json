@@ -56,11 +56,8 @@
         "temp/": true,
         "Temp/": true
     },
-<<<<<<< Updated upstream
-    "dotnet.defaultSolution": "Illusion.slnx"
-=======
-    "dotnet.defaultSolution": "Illusion-main.slnx",
+    "Illusion.slnx=======dotnet.defaultSolution": "Illusion-main.slnx",
     "files.autoSave": "off",
-    "editor.formatOnSave": true
->>>>>>> Stashed changes
+    "editor.formatOnSave": "true>>>>>>>Stashedchanges",
+    "dotnet.defaultSolution": "Illusion.slnx"
 }

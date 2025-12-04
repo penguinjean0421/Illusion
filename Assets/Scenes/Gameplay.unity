@@ -346,8 +346,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Bouncer
       objectReference: {fileID: 0}
-<<<<<<< Updated upstream
-=======
     - target: {fileID: 8992606210338654910, guid: 8717c5e52ea3f6044a960e20df9e86fa, type: 3}
       propertyPath: m_Color.b
       value: 0.21960786
@@ -368,7 +366,6 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: c5919f1f3f558b741b6ec7f9140baa92, type: 2}
->>>>>>> Stashed changes
     - target: {fileID: 8992606210338654911, guid: 8717c5e52ea3f6044a960e20df9e86fa, type: 3}
       propertyPath: m_RootOrder
       value: 10
@@ -383,11 +380,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8992606210338654911, guid: 8717c5e52ea3f6044a960e20df9e86fa, type: 3}
       propertyPath: m_LocalPosition.x
-<<<<<<< Updated upstream
-      value: 1.94
-=======
       value: -48.16988
->>>>>>> Stashed changes
       objectReference: {fileID: 0}
     - target: {fileID: 8992606210338654911, guid: 8717c5e52ea3f6044a960e20df9e86fa, type: 3}
       propertyPath: m_LocalPosition.y
@@ -430,8 +423,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8717c5e52ea3f6044a960e20df9e86fa, type: 3}
-<<<<<<< Updated upstream
-=======
 --- !u!4 &88110307 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3513023504703154419, guid: ee61b9682d42e8d44a4a786b8d3fccab, type: 3}
@@ -577,7 +568,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 16}
   m_EdgeRadius: 0
->>>>>>> Stashed changes
 --- !u!1 &141050841
 GameObject:
   m_ObjectHideFlags: 0
@@ -671,11 +661,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5243515821332038537, guid: 763528ec8bf3f714dafb299678bb2be4, type: 3}
       propertyPath: m_LocalPosition.x
-<<<<<<< Updated upstream
-      value: 1.5
-=======
       value: -51.5
->>>>>>> Stashed changes
       objectReference: {fileID: 0}
     - target: {fileID: 5243515821332038537, guid: 763528ec8bf3f714dafb299678bb2be4, type: 3}
       propertyPath: m_LocalPosition.y
@@ -717,8 +703,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Point (2)
       objectReference: {fileID: 0}
-<<<<<<< Updated upstream
-=======
     - target: {fileID: 8803962994919560925, guid: 763528ec8bf3f714dafb299678bb2be4, type: 3}
       propertyPath: m_SortingOrder
       value: 0
@@ -727,7 +711,6 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: c5919f1f3f558b741b6ec7f9140baa92, type: 2}
->>>>>>> Stashed changes
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -741,8 +724,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-<<<<<<< Updated upstream
-=======
     - target: {fileID: 900583446791262752, guid: d5ef8368d2d77f34dab6ee56449ef0b0, type: 3}
       propertyPath: m_Anchor.x
       value: 0.43063533
@@ -767,7 +748,6 @@ PrefabInstance:
       propertyPath: m_Motor.m_MaximumMotorForce
       value: 50000
       objectReference: {fileID: 0}
->>>>>>> Stashed changes
     - target: {fileID: 2386206432180955885, guid: d5ef8368d2d77f34dab6ee56449ef0b0, type: 3}
       propertyPath: m_Name
       value: Right
@@ -816,8 +796,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-<<<<<<< Updated upstream
-=======
     - target: {fileID: 2782187883765324182, guid: d5ef8368d2d77f34dab6ee56449ef0b0, type: 3}
       propertyPath: m_ConstrainProportionsScale
       value: 1
@@ -978,7 +956,6 @@ PrefabInstance:
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[15].y
       value: 0.13017702
       objectReference: {fileID: 0}
->>>>>>> Stashed changes
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2574,8 +2551,6 @@ PrefabInstance:
       propertyPath: m_Mass
       value: 1
       objectReference: {fileID: 0}
-<<<<<<< Updated upstream
-=======
     - target: {fileID: 6865321364315942534, guid: d5ef8368d2d77f34dab6ee56449ef0b0, type: 3}
       propertyPath: m_Mass
       value: 3
@@ -2760,7 +2735,6 @@ PrefabInstance:
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[18].y
       value: 0.057041526
       objectReference: {fileID: 0}
->>>>>>> Stashed changes
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2939,15 +2913,9 @@ Transform:
   m_GameObject: {fileID: 1440831360}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-<<<<<<< Updated upstream
-  m_LocalPosition: {x: -4.6, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-=======
   m_LocalPosition: {x: 5.62, y: 8.99, z: 0}
   m_LocalScale: {x: 1.47, y: 1.47, z: 1.47}
   m_ConstrainProportionsScale: 1
->>>>>>> Stashed changes
   m_Children: []
   m_Father: {fileID: 1484776405}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3032,11 +3000,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-<<<<<<< Updated upstream
-  m_AnchoredPosition: {x: 0, y: 0}
-=======
   m_AnchoredPosition: {x: 2, y: -980}
->>>>>>> Stashed changes
   m_SizeDelta: {x: 300, y: 100}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &1474453672
@@ -3190,11 +3154,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8756566878539719519, guid: 12002f538d555eb45b35a400f0051a2f, type: 3}
       propertyPath: m_LocalPosition.x
-<<<<<<< Updated upstream
-      value: 3.3
-=======
       value: -43.1
->>>>>>> Stashed changes
       objectReference: {fileID: 0}
     - target: {fileID: 8756566878539719519, guid: 12002f538d555eb45b35a400f0051a2f, type: 3}
       propertyPath: m_LocalPosition.y
@@ -3249,8 +3209,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Side (1)
       objectReference: {fileID: 0}
-<<<<<<< Updated upstream
-=======
     - target: {fileID: 8194989948526111076, guid: 12002f538d555eb45b35a400f0051a2f, type: 3}
       propertyPath: m_SortingOrder
       value: 0
@@ -3259,7 +3217,6 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: c5919f1f3f558b741b6ec7f9140baa92, type: 2}
->>>>>>> Stashed changes
     - target: {fileID: 8756566878539719519, guid: 12002f538d555eb45b35a400f0051a2f, type: 3}
       propertyPath: m_RootOrder
       value: 9
@@ -3270,11 +3227,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8756566878539719519, guid: 12002f538d555eb45b35a400f0051a2f, type: 3}
       propertyPath: m_LocalPosition.x
-<<<<<<< Updated upstream
-      value: -3.3
-=======
       value: -49.17988
->>>>>>> Stashed changes
       objectReference: {fileID: 0}
     - target: {fileID: 8756566878539719519, guid: 12002f538d555eb45b35a400f0051a2f, type: 3}
       propertyPath: m_LocalPosition.y
@@ -3500,8 +3453,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Bouncer (1)
       objectReference: {fileID: 0}
-<<<<<<< Updated upstream
-=======
     - target: {fileID: 8992606210338654910, guid: 8717c5e52ea3f6044a960e20df9e86fa, type: 3}
       propertyPath: m_Color.b
       value: 0.27450982
@@ -3522,7 +3473,6 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: c5919f1f3f558b741b6ec7f9140baa92, type: 2}
->>>>>>> Stashed changes
     - target: {fileID: 8992606210338654911, guid: 8717c5e52ea3f6044a960e20df9e86fa, type: 3}
       propertyPath: m_RootOrder
       value: 11
@@ -3537,11 +3487,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8992606210338654911, guid: 8717c5e52ea3f6044a960e20df9e86fa, type: 3}
       propertyPath: m_LocalPosition.x
-<<<<<<< Updated upstream
-      value: -1.94
-=======
       value: -50.53988
->>>>>>> Stashed changes
       objectReference: {fileID: 0}
     - target: {fileID: 8992606210338654911, guid: 8717c5e52ea3f6044a960e20df9e86fa, type: 3}
       propertyPath: m_LocalPosition.y
@@ -3645,8 +3591,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 763528ec8bf3f714dafb299678bb2be4, type: 3}
-<<<<<<< Updated upstream
-=======
 --- !u!1 &1744076996
 GameObject:
   m_ObjectHideFlags: 0
@@ -3938,7 +3882,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5243515821332038537, guid: 45d0d6025b1d0cf469e28bfcaa64660f, type: 3}
   m_PrefabInstance: {fileID: 319781338}
   m_PrefabAsset: {fileID: 0}
->>>>>>> Stashed changes
 --- !u!1 &1878655566
 GameObject:
   m_ObjectHideFlags: 0
@@ -3973,16 +3916,11 @@ MonoBehaviour:
   ball: {fileID: 1242723216870563048, guid: 5b83e35f1b7de7f488226cda7b693c98, type: 3}
   startPos: {x: 0.25, y: 7.2, z: 0}
   scoreManager: {fileID: 709629193}
-<<<<<<< Updated upstream
-  minScores: 640000002c010000
-  time: 20
-=======
   chargeGauge: {fileID: 1773520149}
   curForce: 0
   minScores: 0a00000000000000
   time: 20
   isCanLaunched: 0
->>>>>>> Stashed changes
 --- !u!4 &1878655568
 Transform:
   m_ObjectHideFlags: 0
@@ -4087,8 +4025,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 10}
   m_EdgeRadius: 0
-<<<<<<< Updated upstream
-=======
 --- !u!4 &1889315553 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8992606210338654911, guid: 8717c5e52ea3f6044a960e20df9e86fa, type: 3}
@@ -4405,7 +4341,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
->>>>>>> Stashed changes
 --- !u!1 &2137429273
 GameObject:
   m_ObjectHideFlags: 0
@@ -4509,11 +4444,8 @@ RectTransform:
   - {fileID: 32953871}
   - {fileID: 1009818400}
   - {fileID: 889756949}
-<<<<<<< Updated upstream
-=======
   - {fileID: 1773520148}
   - {fileID: 1744076997}
->>>>>>> Stashed changes
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
