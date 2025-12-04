@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Ball : MonoBehaviour
 {
@@ -7,7 +8,15 @@ public class Ball : MonoBehaviour
         switch (collision.gameObject.tag)
         {
             case "Dead":
-                GameManager.instance.GameEnd();
+                
+                if (SceneManager.GetActiveScene().name != "Tutorial")
+                {
+                    GameManager.instance.GameEnd();
+                }
+                else if(SceneManager.GetActiveScene().name == "Tutorial")
+                {
+                    this.gameObject.transform.position = GameManager.instance.startPos.transform.position;
+                }
                 break;
 
             case "Bouncer":

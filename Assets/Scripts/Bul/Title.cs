@@ -9,13 +9,23 @@ public class Title : MonoBehaviour
     public GameObject ImageGameObject;
     public GameObject ButtonGameObject;
     public GameObject ButtonGameObject2;
-
+    
+    public GameObject ButtonGameObject3;
     public void TitleButton()
     {
+<<<<<<< Updated upstream
        // 이미지그림 및 버튼 SetActive False
        ImageGameObject.SetActive(false);
        ButtonGameObject.SetActive(false);
        ButtonGameObject2.SetActive(true);
+=======
+    // 이미지그림 및 버튼 SetActive False
+        ImageGameObject.SetActive(false);
+        ButtonGameObject.SetActive(false);
+        ButtonGameObject3.SetActive(false);
+        ButtonGameObject2.SetActive(true);
+        
+>>>>>>> Stashed changes
     }
 
     public void Tutorial()

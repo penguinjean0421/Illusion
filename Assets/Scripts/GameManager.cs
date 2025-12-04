@@ -25,6 +25,17 @@ public class GameManager : MonoBehaviour
     Text highScoreText, scoreText;
     Text timerText;
 
+<<<<<<< Updated upstream
+=======
+    // (슬라이더 UI 컴포넌트를 에디터에서 연결하기 위해 추가)
+    public Slider chargeGauge;
+    float Max = 45f;
+    float Min = 21f;
+
+    [SerializeField]
+    float curForce;
+
+>>>>>>> Stashed changes
     // 상점
     GameObject store;
 
@@ -64,28 +75,103 @@ public class GameManager : MonoBehaviour
         highScore = PlayerPrefs.HasKey("HighScore") ? PlayerPrefs.GetInt("HighScore") : 0;
         highScoreText.text = $"HighScore : {highScore}";
         isCanPlay = false;
+<<<<<<< Updated upstream
+=======
+        curForce = Min + 1f;
+    }
+
+    int tempPoint = 1;
+
+    public void Slider()
+    {
+        if (!isCanPlay) { return; }
+
+        if (Input.GetKey(KeyCode.Space) && isCanLaunched)
+        {
+
+            if (curForce >= Max)
+            {
+                // Max에 도달하면 방향을 바꿔서 힘을 감소시킴
+                tempPoint = 1;
+            }
+            else if (curForce <= Min)
+            {
+                // Min에 도달하면 방향을 바꿔서 힘을 증가시킴
+                tempPoint = -1;
+            }
+
+            // charge sibal nom a
+            if (tempPoint == 1)
+            {
+
+                curForce -= 30f * Time.deltaTime;
+            }
+            else if (tempPoint == -1)
+            {
+                curForce += 30f * Time.deltaTime;
+            }
+
+            //  (슬라이더의 값이 Min/Max 범위를 벗어나지 않도록 강제로 고정)
+            curForce = Mathf.Clamp(curForce, Min, Max);
+
+            //  (현재 curForce 값을 슬라이더의 value에 반영하여 UI 업데이트)
+            if (chargeGauge != null)
+            {
+                chargeGauge.value = curForce;
+            }
+        }
+>>>>>>> Stashed changes
     }
 
     void Update()
     {
+
+
+        #region 
+
+
+
+        //if(SceneManager.GetActiveScene().name == "Tutorial")
+        {
+            if(Input.GetKeyDown(KeyCode.Escape))
+            {
+                EndTutorial();
+            }
+        }
+
+
+        #endregion
+
+
+
         if (!isCanPlay) { return; }
 
         if (Input.GetKey(KeyCode.A))
         {
+<<<<<<< Updated upstream
             left.AddTorque(25f);
+=======
+            left.AddTorque(1200f);
+>>>>>>> Stashed changes
         }
         else
         {
-            left.AddTorque(-20f);
+            left.AddTorque(-500f);
         }
 
+<<<<<<< Updated upstream
         if (Input.GetKey(KeyCode.D))
         {
             right.AddTorque(-25f);
+=======
+        if (Input.GetKey(KeyCode.L))
+        {
+            right.AddTorque(-1200f);
+>>>>>>> Stashed changes
         }
         else
         {
-            right.AddTorque(20f);
+            right.AddTorque(500f);
         }
 
         if (Input.GetKeyDown(KeyCode.L)) { OnReset(); }
@@ -196,6 +282,8 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
+
+
     public void StoreClose()
     {
         store.SetActive(false);
@@ -206,8 +294,41 @@ public class GameManager : MonoBehaviour
 
     void OnReset()
     {
+<<<<<<< Updated upstream
         PlayerPrefs.DeleteKey("HighScore");
         Debug.Log("기록말살");
+=======
+        Rigidbody2D ballRb = spawnedBall.GetComponent<Rigidbody2D>();
+        ballRb.AddForce(Vector2.up * curForce, ForceMode2D.Impulse);
+        // 발사 후 게이지 초기 위치로 돌리기
+        curForce = Min + 1f;
+
+        // UI도 초기화 (Launch는 Update 바깥에서 호출될 가능성이 높으므로 명시적으로 업데이트)
+        if (chargeGauge != null)
+        {
+            chargeGauge.value = curForce;
+        }
+
+        Debug.Log($"Rb : {ballRb.velocity}");
+    }
+
+    public void EndTutorial()
+    {
+        SceneManager.LoadScene("Title");
+    }
+
+    #endregion
+
+    #region UI
+    public void MoneyUpdate(int money)
+    {
+        goldUI.text = $"Gold : {money}";
+    }
+
+    public void BuyItem(string name)
+    {
+        bought.text = $"{name} 구매";
+>>>>>>> Stashed changes
     }
     #endregion
 
