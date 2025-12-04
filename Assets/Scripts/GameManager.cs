@@ -145,7 +145,7 @@ public class GameManager : MonoBehaviour
             left.AddTorque(-20f);
         }
 
-        if (Input.GetKey(KeyCode.L))
+        if (Input.GetKey(KeyCode.L) || Input.GetKey(KeyCode.D))
         {
             right.AddTorque(-50f);
         }
@@ -295,6 +295,8 @@ public class GameManager : MonoBehaviour
         {
             chargeGauge.value = curForce;
         }
+
+        Debug.Log($"Rb : {ballRb.velocity}");
     }
     #endregion
 
@@ -327,8 +329,6 @@ public class GameManager : MonoBehaviour
         chargeGauge.minValue = Min;
         chargeGauge.maxValue = Max;
         chargeGauge.value = curForce;
-
-
     }
     #endregion
 
