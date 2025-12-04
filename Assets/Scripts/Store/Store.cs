@@ -12,6 +12,7 @@ public class Store : MonoBehaviour
     public Transform contentParent;        // 아이템 슬롯들이 생성될 부모 Transform (ScrollView Content)
 
     int playerGold = 500; // 현재 플레이어의 골드
+    string boughtItem;
 
     void Start()
     {
@@ -66,6 +67,7 @@ public class Store : MonoBehaviour
         {
             // 3. 구매 처리
             playerGold -= itemToBuy.price; // 골드 차감 (실제로는 인벤토리/재화 관리자 호출)
+            boughtItem = itemToBuy.itemName;
 
             // 아이템 지급 로직 (예시)
             Debug.Log($"**구매 성공**: {itemToBuy.itemName}을(를) {itemToBuy.price} 골드로 구매했습니다.");
@@ -113,5 +115,6 @@ public class Store : MonoBehaviour
         // 예를 들어: UIManager.Instance.UpdateGoldText(playerGold);
 
         GameManager.instance.MoneyUpdate(playerGold);
+        GameManager.instance.BuyItem(boughtItem);
     }
 }

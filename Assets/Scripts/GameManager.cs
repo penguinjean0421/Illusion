@@ -35,6 +35,8 @@ public class GameManager : MonoBehaviour
 
     // 상점
     GameObject store;
+    Text goldUI;
+    Text bought;
 
     // 점수
     int level;
@@ -51,9 +53,6 @@ public class GameManager : MonoBehaviour
     bool isCanPlay;
 
     public bool isCanLaunched = false;
-
-    // store
-    Text goldUI;
 
     void Awake()
     {
@@ -300,6 +299,18 @@ public class GameManager : MonoBehaviour
     }
     #endregion
 
+    #region UI
+    public void MoneyUpdate(int money)
+    {
+        goldUI.text = $"Gold : {money}";
+    }
+
+    public void BuyItem(string name)
+    {
+        bought.text = $"{name} 구매";
+    }
+    #endregion
+
     #region Initialize
     void OnInitialize()
     {
@@ -323,6 +334,7 @@ public class GameManager : MonoBehaviour
 
         store = GameObject.Find("Store");
         goldUI = GameObject.Find("Gold").GetComponent<Text>();
+        bought = GameObject.Find("Bought").GetComponent<Text>();
         store.SetActive(false);
 
         chargeGauge = GameObject.Find("ChargeSlider").GetComponent<Slider>();
@@ -331,14 +343,6 @@ public class GameManager : MonoBehaviour
         chargeGauge.value = curForce;
     }
     #endregion
-
-    #region UI
-    public void MoneyUpdate(int money)
-    {
-        goldUI.text = $"Gold : {money}";
-    }
-    #endregion
-
 
     #region Developer Cheat
     void OnReset()
