@@ -14,7 +14,6 @@ public class Ball : MonoBehaviour
         rigid2D = GetComponent<Rigidbody2D>();
     }
 
-
     void FixedUpdate()
     {
         float veloX = rigid2D.velocity.x;
@@ -34,12 +33,12 @@ public class Ball : MonoBehaviour
         switch (collision.gameObject.tag)
         {
             case "Dead":
-                
+
                 if (SceneManager.GetActiveScene().name != "Tutorial")
                 {
                     GameManager.instance.GameEnd();
                 }
-                else if(SceneManager.GetActiveScene().name == "Tutorial")
+                else if (SceneManager.GetActiveScene().name == "Tutorial")
                 {
                     this.gameObject.transform.position = GameManager.instance.startPos.transform.position;
                 }

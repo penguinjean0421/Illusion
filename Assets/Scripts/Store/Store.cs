@@ -98,8 +98,7 @@ public class Store : MonoBehaviour
                     break;
             }
 
-            // 구매 후 UI 갱신 (선택 사항: 재화 표시 등)
-            UpdatePlayerCurrencyUI();
+            UpdatePlayerCurrencyUI(); // 구매 후 UI 갱신 (선택 사항: 재화 표시 등)
         }
         else
         {

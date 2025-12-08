@@ -114,21 +114,12 @@ public class GameManager : MonoBehaviour
             curForce = Mathf.Clamp(curForce, Min, Max);
 
             // 💡 (현재 curForce 값을 슬라이더의 value에 반영하여 UI 업데이트)
-            if (chargeGauge != null)
-            {
-                chargeGauge.value = curForce;
-            }
+            if (chargeGauge != null) { chargeGauge.value = curForce; }
         }
     }
 
     void Update()
     {
-
-
-        #region 
-
-
-
         //if(SceneManager.GetActiveScene().name == "Tutorial")
         {
             if (Input.GetKeyDown(KeyCode.Escape))
@@ -137,40 +128,21 @@ public class GameManager : MonoBehaviour
             }
         }
 
-
-        #endregion
-
-
-
         if (!isCanPlay) { return; }
 
-        // 💡 (매 프레임마다 Slider 게이지 충전/방전 로직을 실행하도록 호출)
-        Slider();
+        Slider(); // 매 프레임마다 Slider 게이지 충전/방전 로직을 실행하도록 호출
 
         if (Input.GetKeyUp(KeyCode.Space) && isCanLaunched)
         {
-
             Launch();
             isCanLaunched = false;
         }
 
-        if (Input.GetKey(KeyCode.A))
-        {
-            left.AddTorque(1200f);
-        }
-        else
-        {
-            left.AddTorque(-500f);
-        }
+        if (Input.GetKey(KeyCode.A)) { left.AddTorque(1200f); }
+        else { left.AddTorque(-500f); }
 
-        if (Input.GetKey(KeyCode.L))
-        {
-            right.AddTorque(-1200f);
-        }
-        else
-        {
-            right.AddTorque(500f);
-        }
+        if (Input.GetKey(KeyCode.L)) { right.AddTorque(-1200f); }
+        else { right.AddTorque(500f); }
 
         if (Input.GetKeyDown(KeyCode.R)) { OnReset(); }
     }
@@ -189,10 +161,7 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 0f;
         Destroy(spawnedBall);
 
-        if (curTime > 0 || score < minScores[level])
-        {
-            GameOver();
-        }
+        if (curTime > 0 || score < minScores[level]) { GameOver(); }
         else
         {
             LevelUp();
@@ -204,10 +173,7 @@ public class GameManager : MonoBehaviour
     {
         isCanPlay = false;
 
-        if (fadeEffect != null)
-        {
-            fadeEffect.StartGameOverEffect();
-        }
+        if (fadeEffect != null) { fadeEffect.StartGameOverEffect(); }
 
         highScoreText.gameObject.SetActive(true);
         quitButton.SetActive(true);
@@ -247,13 +213,12 @@ public class GameManager : MonoBehaviour
             }
         }
     }
-
     #endregion
+
     void LevelUp()
     {
         level++;
     }
-
 
     #region Buttons
     public void GameStart()
@@ -292,8 +257,6 @@ public class GameManager : MonoBehaviour
         StartCoroutine(StartTimer()); 
         */
     }
-
-
 
     public void StoreClose()
     {
