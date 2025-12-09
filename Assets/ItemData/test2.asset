@@ -17,4 +17,4 @@ MonoBehaviour:
   itemName: illusion
   itemDescription: will o' trick
   price: 200
-  itemIcon: {fileID: -4302423234172392516, guid: 65140fd9f0fb5424d99100f8252cb26f, type: 3}
+  itemIcon: {fileID: 0}

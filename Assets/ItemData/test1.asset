@@ -17,4 +17,4 @@ MonoBehaviour:
   itemName: DOBU
   itemDescription: Test ment
   price: 100
-  itemIcon: {fileID: 5142870381175752398, guid: 65140fd9f0fb5424d99100f8252cb26f, type: 3}
+  itemIcon: {fileID: 0}
