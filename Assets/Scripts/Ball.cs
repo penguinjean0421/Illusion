@@ -10,7 +10,7 @@ public class Ball : MonoBehaviour
     public float maxNegSpeed = -50f;
 
     // 계수 변동
-    float coefficient = 1f;
+    float coefficient = 0f;
     internal float coefficientMin = 0.3f;
     internal float coefficientMax = 1.3f;
 
@@ -44,6 +44,9 @@ public class Ball : MonoBehaviour
     void OnCollisionEnter2D(Collision2D collision)
     {
         Debug.LogWarning($"velocity : {rigid2D.velocity}");
+
+        coefficient = Random.Range(coefficientMin, coefficientMax);
+
         switch (collision.gameObject.tag)
         {
             case "Dead":
@@ -89,6 +92,8 @@ public class Ball : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
+        coefficient = Random.Range(coefficientMin, coefficientMax);
+
         if (collision.gameObject.tag == "Tunnel")
         {
             GameManager.instance.UpdateScore(wormHole, coefficient);

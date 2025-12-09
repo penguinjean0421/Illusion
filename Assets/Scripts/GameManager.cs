@@ -15,6 +15,8 @@ public class GameManager : MonoBehaviour
     public GameObject startPos;
 
     Rigidbody2D left, right;
+    public float leftTorque = 1200f;
+    public float rightTorque = 500f;
 
     //UI
     GameObject startButton;
@@ -138,11 +140,15 @@ public class GameManager : MonoBehaviour
             isCanLaunched = false;
         }
 
-        if (Input.GetKey(KeyCode.A)) { left.AddTorque(1200f); }
-        else { left.AddTorque(-500f); }
+        if (Input.GetKey(KeyCode.A))
+        {
+            left.AddTorque(leftTorque);
+        }
+        else { left.AddTorque(-rightTorque); }
 
-        if (Input.GetKey(KeyCode.L)) { right.AddTorque(-1200f); }
-        else { right.AddTorque(500f); }
+        if (Input.GetKey(KeyCode.L))
+        { right.AddTorque(-leftTorque); }
+        else { right.AddTorque(rightTorque); }
 
         Cheat();
     }
@@ -157,17 +163,17 @@ public class GameManager : MonoBehaviour
 
     public void GameEnd()
     {
-        Time.timeScale = 0f;
-
         if (curTime > 0 || score < minScores[level])
         {
+            Time.timeScale = 0f;
             GameOver();
             Destroy(spawnedBall);
         }
         else
         {
-            store.SetupShopUI();
+            spawnedBall.SetActive(false);
             storeObj.SetActive(true);
+            store.SetupShopUI();
         }
     }
 
@@ -208,8 +214,6 @@ public class GameManager : MonoBehaviour
             {
                 Debug.Log("라운드 종료");
                 curTime = 0;
-                Time.timeScale = 0f;
-
                 GameEnd();
                 yield break;
             }
@@ -260,8 +264,8 @@ public class GameManager : MonoBehaviour
         storeObj.SetActive(false);
         score = 0;
         level++;
+        spawnedBall.SetActive(true);
         spawnedBall.transform.position = startPos.transform.position;
-        Time.timeScale = 1f;
         StartCoroutine(StartTimer());
     }
 
@@ -295,7 +299,7 @@ public class GameManager : MonoBehaviour
 
     public void BuyItem(string name)
     {
-        bought.text = $"{name} 구매";
+        bought.text = $"{name} 구매 완료";
     }
 
     #endregion

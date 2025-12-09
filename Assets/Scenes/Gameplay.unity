@@ -245,16 +245,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   allShopItems:
+  - {fileID: 11400000, guid: 90561891008d7784a9f9d666ef18f8fa, type: 2}
+  - {fileID: 11400000, guid: e19d0c94e97292f43b55db444ef3d17b, type: 2}
+  - {fileID: 11400000, guid: 6e102a8667eaaf5438522be3e7489b57, type: 2}
+  - {fileID: 11400000, guid: 2e57cc050db13df408879a1b00d5cf3e, type: 2}
   - {fileID: 11400000, guid: 1d4a126318570a1469963d38ee595230, type: 2}
-  - {fileID: 11400000, guid: 6d622a2f3874c5849a4406cc659cd65a, type: 2}
   - {fileID: 11400000, guid: 937e456a93e481b4bad265929296171a, type: 2}
   - {fileID: 11400000, guid: e6f810526c1005447b16e3cb7ffa26da, type: 2}
-  - {fileID: 11400000, guid: 63841075b87cc774f93ff999973e690c, type: 2}
   - {fileID: 11400000, guid: e9bc2de1bc3cb854fae0966b4e029263, type: 2}
   - {fileID: 11400000, guid: a0c3dce04f4fa404ba9e7c02eed565b1, type: 2}
   - {fileID: 11400000, guid: 592b046d02752ba4680630e0b3a7b4bd, type: 2}
-  - {fileID: 11400000, guid: 2c00cd6727ca99d4e9df880d318a3deb, type: 2}
-  - {fileID: 11400000, guid: 51d425d90867ba442a89a62880216e9a, type: 2}
   maxDisplayStore: 6
   shopItemSlotPrefab: {fileID: 6010537168064377677, guid: ae6722d090a944b048ec793fdb183cb5, type: 3}
   contentParent: {fileID: 2023370667}
@@ -5030,11 +5030,11 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 25471706}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 0, y: -120}
-  m_SizeDelta: {x: 320, y: 60}
-  m_Pivot: {x: 0, y: 1}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 600, y: 60}
+  m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &1493967706
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5062,13 +5062,13 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 0
     m_MaxSize: 300
-    m_Alignment: 3
+    m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: New Text
+  m_Text: "\uAD6C\uB9E4\uD55C \uC544\uC774\uD15C"
 --- !u!222 &1493967707
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6063,6 +6063,8 @@ MonoBehaviour:
   ball: {fileID: 1242723216870563048, guid: 5b83e35f1b7de7f488226cda7b693c98, type: 3}
   spawnedBall: {fileID: 0}
   startPos: {fileID: 1750150172}
+  leftTorque: 1200
+  rightTorque: 500
   chargeGauge: {fileID: 259568}
   curForce: 0
   minScores: 0a00000000000000
