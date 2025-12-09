@@ -6,6 +6,9 @@ public class Store : MonoBehaviour
     [Header("Data Source")]
     // ScriptableObject 아이템 목록을 여기에 끌어다 놓습니다.
     public List<ItemData> allShopItems;
+    public int maxDisplayStore = 6;
+
+
 
     [Header("UI References")]
     public GameObject shopItemSlotPrefab; // ShopItemSlot 스크립트가 붙은 프리팹
@@ -31,25 +34,50 @@ public class Store : MonoBehaviour
 
         itemSlotDictionary.Clear();
 
-        // 아이템 목록을 순회하며 슬롯을 생성합니다.
-        foreach (ItemData itemData in allShopItems)
+        List<ItemData> shopDisplayItems = GetRandomItems(allShopItems, maxDisplayStore);
+
+        foreach (ItemData itemData in shopDisplayItems)
         {
+            if (itemSlotDictionary.ContainsKey(itemData.itemID))
+            {
+                Debug.LogWarning($"경고: 상점 디스플레이 아이템 목록에 중복된 ID가 있습니다. ID: {itemData.itemID}");
+                continue;
+            }
+
             GameObject slotObject = Instantiate(shopItemSlotPrefab, contentParent);
             ShopItemSlot slot = slotObject.GetComponent<ShopItemSlot>();
 
             slot.SetItemData(itemData);
-
             slot.OnBuyButtonClicked += BuyItem;
-
             slot.EnableButton();
 
             itemSlotDictionary.Add(itemData.itemID, slot);
         }
 
-        //  게임하면서 얻은 골드 추가
         playerGold += GameManager.instance.score;
         UpdatePlayerCurrencyUI();
         Debug.Log("상점 UI 로드 완료. 현재 골드: " + playerGold);
+    }
+
+    // 상점에 진열한 아이템 선별
+    List<ItemData> GetRandomItems(List<ItemData> sourceList, int count)
+    {
+        List<ItemData> resultList = new List<ItemData>();
+
+        List<ItemData> availableItems = new List<ItemData>(sourceList);
+
+        int itemsToPick = Mathf.Min(count, availableItems.Count);
+
+        for (int i = 0; i < itemsToPick; i++)
+        {
+            int randomIndex = Random.Range(0, availableItems.Count);
+
+            ItemData selectedItem = availableItems[randomIndex];
+            resultList.Add(selectedItem);
+
+            availableItems.RemoveAt(randomIndex);
+        }
+        return resultList;
     }
 
     void BuyItem(string itemID)
@@ -89,11 +117,12 @@ public class Store : MonoBehaviour
                     // PlayerStatsManager.Instance.ApplyPermanentUpgrade(itemToBuy.ItemID);
 
                     ItemManager.instance.GravaityChange(itemToBuy.itemID);
-                    ItemManager.instance.ObjeectScore(itemToBuy.itemID);
+                    ItemManager.instance.ObjeectScoreUp(itemToBuy.itemID);
+                    ItemManager.instance.InsertWormHole(itemToBuy.itemID);
                     break;
 
                 case (ItemData.ItemType.Object):
-                    ItemManager.instance.ObjectOnOff(itemToBuy.itemID);
+                    ItemManager.instance.ObjectAddDestroy(itemToBuy.itemID);
                     break;
 
                 case (ItemData.ItemType.Test):

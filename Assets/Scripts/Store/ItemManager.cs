@@ -22,35 +22,39 @@ public class ItemManager : MonoBehaviour
     {
         Rigidbody2D ballRb = GameManager.instance.spawnedBall.GetComponent<Rigidbody2D>();
 
-        if (itemID == "중력감소") { ballRb.gravityScale -= 0.1f; }
+        if (itemID == "gsDown")
+        {
+            ballRb.gravityScale -= 0.1f;
+            if (ballRb.gravityScale < 0f) { ballRb.gravityScale = 0f; }
+        }
 
-        if (itemID == "중력증가") { ballRb.gravityScale += 0.1f; }
+        if (itemID == "gsUp") { ballRb.gravityScale += 0.1f; }
     }
 
-    // 프랍 점수 강화
-    public void ObjeectScore(string itemID)
+    // 프랍 기본 점수 강화
+    public void ObjeectScoreUp(string itemID)
     {
         Ball ball = GameManager.instance.spawnedBall.GetComponent<Ball>();
 
         switch (itemID)
         {
             // 바운서
-            case ("바운서"):
+            case ("osuB"):
                 ball.bouncerScore += 10;
                 break;
 
             // 포인트
-            case ("포인트"):
+            case ("osuP"):
                 ball.pointScore += 20;
                 break;
 
             // 포인트2
-            case ("포인트2"):
+            case ("osuP2"):
                 ball.point2Score += 30;
                 break;
 
             //사이드
-            case ("사이드"):
+            case ("osuS"):
                 ball.sideScore += 10;
                 break;
 
@@ -58,29 +62,41 @@ public class ItemManager : MonoBehaviour
                 break;
         }
     }
+
+    // 터널 들어갈때 점수 변동
+    public void InsertWormHole(string itemID)
+    {
+        Ball ball = GameManager.instance.spawnedBall.GetComponent<Ball>();
+        if (itemID == "iwhUp") // 시작점 도착
+        {
+            ball.startPoint += 10;
+        }
+
+        if (itemID == "iwhDown") // 시작점 도착
+        {
+            ball.startPoint -= 10;
+            if (ball.startPoint < 0) { ball.startPoint = 0; }
+        }
+    }
     #endregion
 
-    #region Score
+    #region Object
     // 일정 장소 도착 할때 마다 점수 획득
     public void GetScoreToSpot(string itemID)
     {
-        Rigidbody2D ballRb = GameManager.instance.spawnedBall.GetComponent<Rigidbody2D>();
-        Vector3 ballPos = GameManager.instance.spawnedBall.transform.position;
-        Vector3 startPos = GameManager.instance.spawnedBall.transform.position;
-
-        if (itemID == "시작점오면점수드림") // 시작점 도착
+        Ball ball = GameManager.instance.spawnedBall.GetComponent<Ball>();
+        if (itemID == "gstsStartUp") // 시작점 도착
         {
-            if (ballPos == startPos && ballRb.velocity == Vector2.zero)
-            {
-                GameManager.instance.UpdateScore(10, 0);
-            }
+            ball.startPoint += 10;
+        }
+
+        if (itemID == "gstsStartDown") // 시작점 도착
+        {
+            ball.startPoint -= 10;
         }
     }
 
-    public void ObjectOnOff(string itemID)
-    {
-
-    }
-
+    public void ObjectAddDestroy(string itemID)
+    { }
     #endregion
 }

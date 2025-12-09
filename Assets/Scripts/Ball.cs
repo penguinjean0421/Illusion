@@ -9,11 +9,19 @@ public class Ball : MonoBehaviour
     public float maxPosSpeed = 50f;
     public float maxNegSpeed = -50f;
 
+    // 계수 변동
+    float coefficient = 1f;
+    internal float coefficientMin = 0.3f;
+    internal float coefficientMax = 1.3f;
+    float coolDownTime;
+
     [Header("장애물별 점수")]
     internal int bouncerScore = 10;
     internal int pointScore = 20;
     internal int point2Score = 30;
     internal int sideScore = 10;
+    internal int wormHole = 30;
+    internal int startPoint = 0;
 
     void Awake()
     {
@@ -51,19 +59,19 @@ public class Ball : MonoBehaviour
                 break;
 
             case "Bouncer":
-                GameManager.instance.UpdateScore(bouncerScore, 0);
+                GameManager.instance.UpdateScore(bouncerScore, coefficient);
                 break;
 
             case "Point":
-                GameManager.instance.UpdateScore(pointScore, 0);
+                GameManager.instance.UpdateScore(pointScore, coefficient);
                 break;
 
             case "Point2":
-                GameManager.instance.UpdateScore(point2Score, 0);
+                GameManager.instance.UpdateScore(point2Score, coefficient);
                 break;
 
             case "Side":
-                GameManager.instance.UpdateScore(sideScore, 0);
+                GameManager.instance.UpdateScore(sideScore, coefficient);
                 break;
 
             case "Flipper":
@@ -83,12 +91,13 @@ public class Ball : MonoBehaviour
     {
         if (collision.gameObject.tag == "Tunnel")
         {
-            GameManager.instance.UpdateScore(30, 0);
+            GameManager.instance.UpdateScore(wormHole, coefficient);
         }
 
         if (collision.gameObject.tag == "StartPoint")
         {
             GameManager.instance.isCanLaunched = true;
+            GameManager.instance.UpdateScore(startPoint, coefficient);
         }
     }
 
@@ -98,6 +107,7 @@ public class Ball : MonoBehaviour
         GameManager.instance.Launch();
         //Debug.Log("발사했어요 ㅅㅂ");
     }
+
 }
 
 

@@ -149,10 +149,10 @@ public class GameManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.R)) { OnReset(); }
     }
 
-    public void UpdateScore(int point, int mullIncrease)
+    public void UpdateScore(int point, float mullIncrease)
     {
-        multiplier += mullIncrease;
-        score += point * multiplier;
+        // multiplier = mullIncrease;
+        score += (int)(point * mullIncrease);
         scoreText.text = $"Score : {score}";
         scoreManager.ShowScore(transform.position, point);
         Debug.Log($"multiplier : {multiplier}");
@@ -166,7 +166,6 @@ public class GameManager : MonoBehaviour
         if (curTime > 0 || score < minScores[level]) { GameOver(); }
         else
         {
-            store.SetupShopUI();
             storeObj.SetActive(true);
         }
     }
