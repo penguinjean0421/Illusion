@@ -144,7 +144,7 @@ public class GameManager : MonoBehaviour
         if (Input.GetKey(KeyCode.L)) { right.AddTorque(-1200f); }
         else { right.AddTorque(500f); }
 
-        if (Input.GetKeyDown(KeyCode.R)) { OnReset(); }
+        Cheat();
     }
 
     public void UpdateScore(int point, float mullIncrease)
@@ -166,6 +166,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
+            store.SetupShopUI();
             storeObj.SetActive(true);
         }
     }
@@ -334,10 +335,21 @@ public class GameManager : MonoBehaviour
     #endregion
 
     #region Developer Cheat
-    void OnReset()
+    void Cheat()
+    {
+        if (Input.GetKeyDown(KeyCode.P)) { Reset(); }
+        if (Input.GetKeyDown(KeyCode.O)) { AddScore(); }
+    }
+
+    void Reset()
     {
         PlayerPrefs.DeleteKey("HighScore");
         Debug.Log("기록말살");
+    }
+
+    void AddScore()
+    {
+        UpdateScore(10, 1);
     }
     #endregion
 }

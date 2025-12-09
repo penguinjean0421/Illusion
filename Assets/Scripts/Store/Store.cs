@@ -18,11 +18,6 @@ public class Store : MonoBehaviour
     Dictionary<string, ShopItemSlot> itemSlotDictionary = new Dictionary<string, ShopItemSlot>();
     internal int playerGold = 0; // 현재 플레이어의 골드
     string boughtItem;
-    void Start()
-    {
-        // 씬 시작 시 상점 UI를 구성합니다.
-        SetupShopUI();
-    }
 
     public void SetupShopUI()
     {
