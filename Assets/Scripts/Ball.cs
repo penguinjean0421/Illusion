@@ -13,7 +13,7 @@ public class Ball : MonoBehaviour
     float coefficient = 1f;
     internal float coefficientMin = 0.3f;
     internal float coefficientMax = 1.3f;
-    float coolDownTime;
+
 
     [Header("장애물별 점수")]
     internal int bouncerScore = 10;
@@ -108,6 +108,30 @@ public class Ball : MonoBehaviour
         //Debug.Log("발사했어요 ㅅㅂ");
     }
 
+    IEnumerator StartTimer()
+    {
+        curTime = time;
+        /* curTime = time[level]; */ // Lv마다 다르게 할거면 이걸로 변경
+
+        while (curTime > 0)
+        {
+            curTime -= Time.deltaTime;
+            minute = (int)curTime / 60;
+            second = (int)curTime % 60;
+            timerText.text = minute.ToString("00") + ":" + second.ToString("00");
+            yield return null;
+
+            if (curTime <= 0)
+            {
+                Debug.Log("라운드 종료");
+                curTime = 0;
+                Time.timeScale = 0f;
+
+                GameEnd();
+                yield break;
+            }
+        }
+    }
 }
 
 
