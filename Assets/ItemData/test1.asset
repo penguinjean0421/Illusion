@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: test1
   m_EditorClassIdentifier: 
   Type: 0
-  itemID: 111
+  itemID: test1
   itemName: DOBU
   itemDescription: Test ment
-  price: 100
+  price: 0
   itemIcon: {fileID: 0}

@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7cb61524eb2154786be904b185e516b0, type: 3}
-  m_Name: iwhDown
+  m_Name: atRight
   m_EditorClassIdentifier: 
-  Type: 1
-  itemID: iwhDown
-  itemName: 
-  itemDescription: "\uD130\uB110 \uB4E4\uC5B4\uAC08\uB54C \uC810\uC218 \uAC10\uC18C"
+  Type: 2
+  itemID: atRight
+  itemName: "\uC6B4\uC601 \uB798\uBC84\uB9AC\uC9C0"
+  itemDescription: "\uC624\uB978\uCABD Torque \uAC12\uC744 \uC0C1\uC2B9 \uC2DC\uD0B5\uB2C8\uB2E4."
   price: 0
   itemIcon: {fileID: 0}

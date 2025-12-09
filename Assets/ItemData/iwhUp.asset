@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Type: 1
   itemID: iwhUp
-  itemName: 
+  itemName: "\uBC95\uC758 \uD5C8\uC810"
   itemDescription: "\uD130\uB110 \uB4E4\uC5B4\uAC08\uB54C \uC810\uC218 \uC99D\uAC00"
   price: 0
   itemIcon: {fileID: 0}

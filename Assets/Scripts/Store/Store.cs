@@ -48,7 +48,7 @@ public class Store : MonoBehaviour
         }
 
         playerGold += GameManager.instance.score;
-        UpdatePlayerCurrencyUI();
+        GameManager.instance.MoneyUpdate(playerGold);
         Debug.Log("상점 UI 로드 완료. 현재 골드: " + playerGold);
     }
 
@@ -76,7 +76,9 @@ public class Store : MonoBehaviour
     void BuyItem(string itemID)
     {
         // 1. 아이템 데이터 조회
-        ItemData itemToBuy = allShopItems.Find(item => item.itemID == itemID);
+        // ItemData itemToBuy = allShopItems.Find(item => item.itemID == itemID);
+
+        ItemData itemToBuy = allShopItems.Find(item => item != null && item.itemID == itemID);
 
         if (itemToBuy == null)
         {
@@ -92,43 +94,32 @@ public class Store : MonoBehaviour
             boughtItem = itemToBuy.itemName;
 
             // 아이템 지급 로직 (예시)
-            Debug.Log($"**구매 성공**: {itemToBuy.itemName}을(를) {itemToBuy.price} 골드로 구매했습니다.");
+            Debug.Log($"**구매 성공**: {itemToBuy.Type} 타입 아이템 {itemToBuy.itemName}을(를) {itemToBuy.price} 골드로 구매했습니다.");
             Debug.Log($"남은 골드: {playerGold}");
 
-            Debug.Log($"{itemToBuy.Type} 타입 아이템 {itemToBuy.itemName}을 구매하였다.");
-            switch (itemToBuy.Type)
-            {                // case (ItemData.ItemType.Currency):
-                //     // A. 즉시 재화 지급 (예: 다이아몬드 100개 지급)
-                //     // CurrencyManager.Instance.AddDiamond(100);
-                //     break;
-                // case (ItemData.ItemType.Consumable):
-                //     // B. 소모품 인벤토리에 추가 (실제 사용은 나중에)
-                //     // InventoryManager.Instance.AddItem(itemToBuy.ItemID, 1);
-                //     break;
-                case (ItemData.ItemType.Upgrade):
-                    // C. 영구적인 업그레이드 적용 (예: 최대 체력 영구 증가)
-                    // PlayerStatsManager.Instance.ApplyPermanentUpgrade(itemToBuy.ItemID);
 
-                    ItemManager.instance.GravaityChange(itemToBuy.itemID);
+            switch (itemToBuy.Type)
+            {
+                case (ItemData.ItemType.Upgrade):
                     ItemManager.instance.ObjeectScoreUp(itemToBuy.itemID);
                     ItemManager.instance.InsertWormHole(itemToBuy.itemID);
                     break;
 
                 case (ItemData.ItemType.Object):
-                    ItemManager.instance.ObjectAddDestroy(itemToBuy.itemID);
+                    ItemManager.instance.AddTorque(itemToBuy.itemID);
+                    ItemManager.instance.GravaityChange(itemToBuy.itemID);
+                    ItemManager.instance.CoefficientValueChange(itemToBuy.itemID);
                     break;
 
-                case (ItemData.ItemType.Test):
-                    break;
+                // case (ItemData.ItemType.Test):
+                //     Debug.Log("Test Item");
+                //     break;
 
                 default:
                     break;
             }
 
-            if (itemSlotDictionary.TryGetValue(itemID, out ShopItemSlot purchasedSlot))
-            {
-                purchasedSlot.DisableButton();
-            }
+            if (itemSlotDictionary.TryGetValue(itemID, out ShopItemSlot purchasedSlot)) { purchasedSlot.DisableButton(); }
 
             UpdatePlayerCurrencyUI(); // 구매 후 UI 갱신 (선택 사항: 재화 표시 등)
         }
@@ -139,7 +130,6 @@ public class Store : MonoBehaviour
         }
     }
 
-    // 예시 함수: 플레이어 재화 UI 업데이트 (실제 UI 텍스트 업데이트 로직)
     void UpdatePlayerCurrencyUI()
     {
         // TODO: 게임 내 재화 표시 UI를 업데이트하는 코드를 여기에 작성하세요.

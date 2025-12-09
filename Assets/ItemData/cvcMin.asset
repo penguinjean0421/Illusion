@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7cb61524eb2154786be904b185e516b0, type: 3}
-  m_Name: gstsStartDown
+  m_Name: cvcMin
   m_EditorClassIdentifier: 
-  Type: 1
-  itemID: gstsStartDown
-  itemName: 
-  itemDescription: "\uC2DC\uC791\uC810 \uBC29\uBB38\uC2DC \uC810\uC218 \uAC10\uC18C"
+  Type: 2
+  itemID: cvcMin
+  itemName: "\uBE44\uC0C1\uC7A5\uC8FC\uC2DD"
+  itemDescription: "\uBCF4\uB108\uC2A4 \uC810\uC218\uCD5C\uC19F\uAC12 \uC99D\uAC00"
   price: 0
   itemIcon: {fileID: 0}

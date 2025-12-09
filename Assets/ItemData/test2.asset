@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: test2
   m_EditorClassIdentifier: 
   Type: 0
-  itemID: 222
+  itemID: test2
   itemName: illusion
   itemDescription: will o' trick
-  price: 200
+  price: 0
   itemIcon: {fileID: 0}
