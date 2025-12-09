@@ -56,5 +56,8 @@
         "temp/": true,
         "Temp/": true
     },
+    "Illusion.slnx=======dotnet.defaultSolution": "Illusion-main.slnx",
+    "files.autoSave": "off",
+    "editor.formatOnSave": "true>>>>>>>Stashedchanges",
     "dotnet.defaultSolution": "Illusion.slnx"
 }
