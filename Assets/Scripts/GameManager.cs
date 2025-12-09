@@ -166,7 +166,6 @@ public class GameManager : MonoBehaviour
         if (curTime > 0 || score < minScores[level]) { GameOver(); }
         else
         {
-            LevelUp();
             store.SetupShopUI();
             storeObj.SetActive(true);
         }
@@ -218,11 +217,6 @@ public class GameManager : MonoBehaviour
     }
     #endregion
 
-    void LevelUp()
-    {
-        level++;
-    }
-
     #region Buttons
     public void GameStart()
     {
@@ -264,6 +258,8 @@ public class GameManager : MonoBehaviour
     public void StoreClose()
     {
         storeObj.SetActive(false);
+        score = 0;
+        level++;
         spawnedBall = Instantiate(ball, startPos.transform.position, Quaternion.identity);
         Time.timeScale = 1f;
         StartCoroutine(StartTimer());
