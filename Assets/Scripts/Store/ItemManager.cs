@@ -93,6 +93,7 @@ public class ItemManager : MonoBehaviour
         if (itemID == "gstsStartDown") // 시작점 도착
         {
             ball.startPoint -= 10;
+            if (ball.startPoint < 0) { ball.startPoint = 0; }
         }
     }
 
