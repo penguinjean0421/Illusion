@@ -14,8 +14,6 @@ public class GameManager : MonoBehaviour
 
     public GameObject startPos;
 
-    public ScoreManager scoreManager;
-
     Rigidbody2D left, right;
 
     //UI
@@ -154,16 +152,18 @@ public class GameManager : MonoBehaviour
         // multiplier = mullIncrease;
         score += (int)(point * mullIncrease);
         scoreText.text = $"Score : {score}";
-        scoreManager.ShowScore(transform.position, point);
         Debug.Log($"multiplier : {multiplier}");
     }
 
     public void GameEnd()
     {
         Time.timeScale = 0f;
-        Destroy(spawnedBall);
 
-        if (curTime > 0 || score < minScores[level]) { GameOver(); }
+        if (curTime > 0 || score < minScores[level])
+        {
+            GameOver();
+            Destroy(spawnedBall);
+        }
         else
         {
             storeObj.SetActive(true);
@@ -259,7 +259,7 @@ public class GameManager : MonoBehaviour
         storeObj.SetActive(false);
         score = 0;
         level++;
-        spawnedBall = Instantiate(ball, startPos.transform.position, Quaternion.identity);
+        spawnedBall.transform.position = startPos.transform.position;
         Time.timeScale = 1f;
         StartCoroutine(StartTimer());
     }
