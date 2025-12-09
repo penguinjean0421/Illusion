@@ -9,6 +9,12 @@ public class Ball : MonoBehaviour
     public float maxPosSpeed = 50f;
     public float maxNegSpeed = -50f;
 
+    [Header("장애물별 점수")]
+    internal int bouncerScore = 10;
+    internal int pointScore = 20;
+    internal int point2Score = 30;
+    internal int sideScore = 10;
+
     void Awake()
     {
         rigid2D = GetComponent<Rigidbody2D>();
@@ -45,23 +51,19 @@ public class Ball : MonoBehaviour
                 break;
 
             case "Bouncer":
-                GameManager.instance.UpdateScore(10, 0);
-
+                GameManager.instance.UpdateScore(bouncerScore, 0);
                 break;
 
             case "Point":
-                GameManager.instance.UpdateScore(20, 0);
-
+                GameManager.instance.UpdateScore(pointScore, 0);
                 break;
 
             case "Point2":
-                GameManager.instance.UpdateScore(30, 0);
-
+                GameManager.instance.UpdateScore(point2Score, 0);
                 break;
 
             case "Side":
-                GameManager.instance.UpdateScore(10, 0);
-
+                GameManager.instance.UpdateScore(sideScore, 0);
                 break;
 
             case "Flipper":

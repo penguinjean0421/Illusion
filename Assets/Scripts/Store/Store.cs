@@ -11,16 +11,17 @@ public class Store : MonoBehaviour
     public GameObject shopItemSlotPrefab; // ShopItemSlot 스크립트가 붙은 프리팹
     public Transform contentParent;        // 아이템 슬롯들이 생성될 부모 Transform (ScrollView Content)
 
-    int playerGold = 500; // 현재 플레이어의 골드
+    // 구매 후 버튼 비활성화
+    Dictionary<string, ShopItemSlot> itemSlotDictionary = new Dictionary<string, ShopItemSlot>();
+    internal int playerGold = 0; // 현재 플레이어의 골드
     string boughtItem;
-
     void Start()
     {
         // 씬 시작 시 상점 UI를 구성합니다.
         SetupShopUI();
     }
 
-    void SetupShopUI()
+    public void SetupShopUI()
     {
         // 기존의 슬롯이 있다면 모두 제거 (상점 갱신 시 유용)
         foreach (Transform child in contentParent)
@@ -28,29 +29,29 @@ public class Store : MonoBehaviour
             Destroy(child.gameObject);
         }
 
+        itemSlotDictionary.Clear();
+
         // 아이템 목록을 순회하며 슬롯을 생성합니다.
         foreach (ItemData itemData in allShopItems)
         {
-            // 1. 슬롯 UI 생성
             GameObject slotObject = Instantiate(shopItemSlotPrefab, contentParent);
             ShopItemSlot slot = slotObject.GetComponent<ShopItemSlot>();
 
-            // 2. 데이터 설정
             slot.SetItemData(itemData);
 
-            // 3. 구매 이벤트 등록 (가장 중요한 부분)
-            // 슬롯에서 발생한 구매 클릭 이벤트를 ShopManager의 BuyItem 함수로 연결합니다.
             slot.OnBuyButtonClicked += BuyItem;
+
+            slot.EnableButton();
+
+            itemSlotDictionary.Add(itemData.itemID, slot);
         }
 
+        //  게임하면서 얻은 골드 추가
+        playerGold += GameManager.instance.score;
         UpdatePlayerCurrencyUI();
         Debug.Log("상점 UI 로드 완료. 현재 골드: " + playerGold);
     }
 
-    /// <summary>
-    /// 아이템 구매를 처리하는 핵심 로직
-    /// </summary>
-    /// <param name="itemID">구매할 아이템의 ID</param>
     void BuyItem(string itemID)
     {
         // 1. 아이템 데이터 조회
@@ -73,29 +74,38 @@ public class Store : MonoBehaviour
             Debug.Log($"**구매 성공**: {itemToBuy.itemName}을(를) {itemToBuy.price} 골드로 구매했습니다.");
             Debug.Log($"남은 골드: {playerGold}");
 
+            Debug.Log($"{itemToBuy.Type} 타입 아이템 {itemToBuy.itemName}을 구매하였다.");
             switch (itemToBuy.Type)
-            {
-                case (ItemData.ItemType.Currency):
-                    // A. 즉시 재화 지급 (예: 다이아몬드 100개 지급)
-                    // CurrencyManager.Instance.AddDiamond(100);
-                    Debug.Log($"{itemToBuy.Type} 타입 아이템 {itemToBuy.itemName}을 구매하였다.");
-                    break;
-                case (ItemData.ItemType.Consumable):
-                    // B. 소모품 인벤토리에 추가 (실제 사용은 나중에)
-                    // InventoryManager.Instance.AddItem(itemToBuy.ItemID, 1);
-                    Debug.Log($"{itemToBuy.Type} 타입 아이템 {itemToBuy.itemName}을 구매하였다.");
-                    break;
+            {                // case (ItemData.ItemType.Currency):
+                //     // A. 즉시 재화 지급 (예: 다이아몬드 100개 지급)
+                //     // CurrencyManager.Instance.AddDiamond(100);
+                //     break;
+                // case (ItemData.ItemType.Consumable):
+                //     // B. 소모품 인벤토리에 추가 (실제 사용은 나중에)
+                //     // InventoryManager.Instance.AddItem(itemToBuy.ItemID, 1);
+                //     break;
                 case (ItemData.ItemType.Upgrade):
                     // C. 영구적인 업그레이드 적용 (예: 최대 체력 영구 증가)
                     // PlayerStatsManager.Instance.ApplyPermanentUpgrade(itemToBuy.ItemID);
-                    Debug.Log($"{itemToBuy.Type} 타입 아이템 {itemToBuy.itemName}을 구매하였다.");
+
+                    ItemManager.instance.GravaityChange(itemToBuy.itemID);
+                    ItemManager.instance.ObjeectScore(itemToBuy.itemID);
                     break;
+
+                case (ItemData.ItemType.Object):
+                    ItemManager.instance.ObjectOnOff(itemToBuy.itemID);
+                    break;
+
                 case (ItemData.ItemType.Test):
-                    Debug.Log($"{itemToBuy.Type} 타입 아이템 {itemToBuy.itemName}을 구매하였다.");
                     break;
+
                 default:
-                    Debug.Log("접근 불가");
                     break;
+            }
+
+            if (itemSlotDictionary.TryGetValue(itemID, out ShopItemSlot purchasedSlot))
+            {
+                purchasedSlot.DisableButton();
             }
 
             UpdatePlayerCurrencyUI(); // 구매 후 UI 갱신 (선택 사항: 재화 표시 등)

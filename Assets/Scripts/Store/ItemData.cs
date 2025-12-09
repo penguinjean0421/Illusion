@@ -7,10 +7,12 @@ public class ItemData : ScriptableObject
     public enum ItemType
     {
         Test,
-        Consumable, // 소모품
-        Equipment,  // 장비
-        Currency,    // 재화
-        Upgrade
+        Upgrade, // 강화
+        Object // 프랍 관련
+
+        // Consumable, // 소모품
+        // Equipment,  // 장비
+        // Currency,    // 재화
     }
 
     // 상점에 표시될 정보

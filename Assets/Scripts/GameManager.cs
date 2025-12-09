@@ -34,14 +34,16 @@ public class GameManager : MonoBehaviour
     float curForce;
 
     // 상점
-    GameObject store;
+    Store store;
+    GameObject storeObj;
     Text goldUI;
     Text bought;
 
     // 점수
     int level;
     public int[] minScores;
-    int score, highScore;
+    public int score;
+    int highScore;
 
     // 타이머
     public float time;
@@ -165,7 +167,8 @@ public class GameManager : MonoBehaviour
         else
         {
             LevelUp();
-            store.SetActive(true);
+            store.SetupShopUI();
+            storeObj.SetActive(true);
         }
     }
 
@@ -260,7 +263,7 @@ public class GameManager : MonoBehaviour
 
     public void StoreClose()
     {
-        store.SetActive(false);
+        storeObj.SetActive(false);
         spawnedBall = Instantiate(ball, startPos.transform.position, Quaternion.identity);
         Time.timeScale = 1f;
         StartCoroutine(StartTimer());
@@ -298,6 +301,7 @@ public class GameManager : MonoBehaviour
     {
         bought.text = $"{name} 구매";
     }
+
     #endregion
 
     #region Initialize
@@ -321,10 +325,11 @@ public class GameManager : MonoBehaviour
         restartButton = GameObject.Find("Restart");
         restartButton.gameObject.SetActive(false);
 
-        store = GameObject.Find("Store");
+        storeObj = GameObject.Find("Store");
+        store = storeObj.GetComponent<Store>();
         goldUI = GameObject.Find("Gold").GetComponent<Text>();
         bought = GameObject.Find("Bought").GetComponent<Text>();
-        store.SetActive(false);
+        storeObj.SetActive(false);
 
         chargeGauge = GameObject.Find("ChargeSlider").GetComponent<Slider>();
         chargeGauge.minValue = Min;
