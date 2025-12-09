@@ -1,0 +1,103 @@
+using UnityEngine;
+
+public class ItemManager : MonoBehaviour
+{
+    public static ItemManager instance { get; private set; }
+
+    void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    #region Upgrade
+    // 공 중력 변경
+    public void GravaityChange(string itemID)
+    {
+        Rigidbody2D ballRb = GameManager.instance.spawnedBall.GetComponent<Rigidbody2D>();
+
+        if (itemID == "gsDown")
+        {
+            ballRb.gravityScale -= 0.1f;
+            if (ballRb.gravityScale < 0f) { ballRb.gravityScale = 0f; }
+        }
+
+        if (itemID == "gsUp") { ballRb.gravityScale += 0.1f; }
+    }
+
+    // 프랍 기본 점수 강화
+    public void ObjeectScoreUp(string itemID)
+    {
+        Ball ball = GameManager.instance.spawnedBall.GetComponent<Ball>();
+
+        switch (itemID)
+        {
+            // 바운서
+            case ("osuB"):
+                ball.bouncerScore += 10;
+                break;
+
+            // 포인트
+            case ("osuP"):
+                ball.pointScore += 20;
+                break;
+
+            // 포인트2
+            case ("osuP2"):
+                ball.point2Score += 30;
+                break;
+
+            //사이드
+            case ("osuS"):
+                ball.sideScore += 10;
+                break;
+
+            default:
+                break;
+        }
+    }
+
+    // 터널 들어갈때 점수 변동
+    public void InsertWormHole(string itemID)
+    {
+        Ball ball = GameManager.instance.spawnedBall.GetComponent<Ball>();
+        if (itemID == "iwhUp") // 시작점 도착
+        {
+            ball.startPoint += 10;
+        }
+
+        if (itemID == "iwhDown") // 시작점 도착
+        {
+            ball.startPoint -= 10;
+            if (ball.startPoint < 0) { ball.startPoint = 0; }
+        }
+    }
+    #endregion
+
+    #region Object
+    // 일정 장소 도착 할때 마다 점수 획득
+    public void GetScoreToSpot(string itemID)
+    {
+        Ball ball = GameManager.instance.spawnedBall.GetComponent<Ball>();
+        if (itemID == "gstsStartUp") // 시작점 도착
+        {
+            ball.startPoint += 10;
+        }
+
+        if (itemID == "gstsStartDown") // 시작점 도착
+        {
+            ball.startPoint -= 10;
+            if (ball.startPoint < 0) { ball.startPoint = 0; }
+        }
+    }
+
+    public void ObjectAddDestroy(string itemID)
+    { }
+    #endregion
+}

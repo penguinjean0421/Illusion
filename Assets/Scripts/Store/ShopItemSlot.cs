@@ -37,4 +37,21 @@ public class ShopItemSlot : MonoBehaviour
             }
         });
     }
+
+    // 구매 버튼 비활성화
+    public void DisableButton()
+    {
+        if (buyButton != null)
+        {
+            buyButton.interactable = false;
+        }
+    }
+
+    public void EnableButton()
+    {
+        if (buyButton != null)
+        {
+            buyButton.interactable = true;
+        }
+    }
 }

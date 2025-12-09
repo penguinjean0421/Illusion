@@ -3,7 +3,16 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Flipper
+  - Point
+  - Bouncer
+  - Dead
+  - StartPoint
+  - Point2
+  - Tunnel
+  - Blocker
+  - WormHole
   layers:
   - Default
   - TransparentFX

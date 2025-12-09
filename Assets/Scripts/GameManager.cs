@@ -10,9 +10,9 @@ public class GameManager : MonoBehaviour
     public FadeEffect fadeEffect;
 
     public GameObject ball;
-    GameObject spawnedBall;
+    public GameObject spawnedBall;
 
-    public Vector3 startPos;
+    public GameObject startPos;
 
     public ScoreManager scoreManager;
 
@@ -34,12 +34,16 @@ public class GameManager : MonoBehaviour
     float curForce;
 
     // 상점
-    GameObject store;
+    Store store;
+    GameObject storeObj;
+    Text goldUI;
+    Text bought;
 
     // 점수
     int level;
     public int[] minScores;
-    int score, highScore;
+    public int score;
+    int highScore;
 
     // 타이머
     public float time;
@@ -49,6 +53,8 @@ public class GameManager : MonoBehaviour
 
     internal int multiplier;
     bool isCanPlay;
+
+    public bool isCanLaunched = false;
 
     void Awake()
     {
@@ -66,7 +72,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        Time.timeScale = 1;
+        Time.timeScale = 1f;
         score = 0;
         multiplier = 1;
         highScore = PlayerPrefs.HasKey("HighScore") ? PlayerPrefs.GetInt("HighScore") : 0;
@@ -99,32 +105,23 @@ public class GameManager : MonoBehaviour
             if (tempPoint == 1)
             {
 
-                curForce -= 30f * Time.deltaTime;
+                curForce -= 25f * Time.deltaTime;
             }
             else if (tempPoint == -1)
             {
-                curForce += 30f * Time.deltaTime;
+                curForce += 25f * Time.deltaTime;
             }
 
-            //  (슬라이더의 값이 Min/Max 범위를 벗어나지 않도록 강제로 고정)
+            // 💡 (슬라이더의 값이 Min/Max 범위를 벗어나지 않도록 강제로 고정)
             curForce = Mathf.Clamp(curForce, Min, Max);
 
-            //  (현재 curForce 값을 슬라이더의 value에 반영하여 UI 업데이트)
-            if (chargeGauge != null)
-            {
-                chargeGauge.value = curForce;
-            }
+            // 💡 (현재 curForce 값을 슬라이더의 value에 반영하여 UI 업데이트)
+            if (chargeGauge != null) { chargeGauge.value = curForce; }
         }
     }
 
     void Update()
     {
-
-
-        #region 
-
-
-
         //if(SceneManager.GetActiveScene().name == "Tutorial")
         {
             if (Input.GetKeyDown(KeyCode.Escape))
@@ -133,38 +130,29 @@ public class GameManager : MonoBehaviour
             }
         }
 
-
-        #endregion
-
-
-
         if (!isCanPlay) { return; }
 
-        if (Input.GetKey(KeyCode.A))
+        Slider(); // 매 프레임마다 Slider 게이지 충전/방전 로직을 실행하도록 호출
+
+        if (Input.GetKeyUp(KeyCode.Space) && isCanLaunched)
         {
-            left.AddTorque(1200f);
-        }
-        else
-        {
-            left.AddTorque(-500f);
+            Launch();
+            isCanLaunched = false;
         }
 
-        if (Input.GetKey(KeyCode.L))
-        {
-            right.AddTorque(-1200f);
-        }
-        else
-        {
-            right.AddTorque(500f);
-        }
+        if (Input.GetKey(KeyCode.A)) { left.AddTorque(1200f); }
+        else { left.AddTorque(-500f); }
 
-        if (Input.GetKeyDown(KeyCode.L)) { OnReset(); }
+        if (Input.GetKey(KeyCode.L)) { right.AddTorque(-1200f); }
+        else { right.AddTorque(500f); }
+
+        if (Input.GetKeyDown(KeyCode.R)) { OnReset(); }
     }
 
-    public void UpdateScore(int point, int mullIncrease)
+    public void UpdateScore(int point, float mullIncrease)
     {
-        multiplier += mullIncrease;
-        score += point * multiplier;
+        // multiplier = mullIncrease;
+        score += (int)(point * mullIncrease);
         scoreText.text = $"Score : {score}";
         scoreManager.ShowScore(transform.position, point);
         Debug.Log($"multiplier : {multiplier}");
@@ -175,14 +163,10 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 0f;
         Destroy(spawnedBall);
 
-        if (curTime <= 0 && score >= minScores[level])
-        {
-            LevelUp();
-            store.SetActive(true);
-        }
+        if (curTime > 0 || score < minScores[level]) { GameOver(); }
         else
         {
-            GameOver();
+            storeObj.SetActive(true);
         }
     }
 
@@ -190,10 +174,7 @@ public class GameManager : MonoBehaviour
     {
         isCanPlay = false;
 
-        if (fadeEffect != null)
-        {
-            fadeEffect.StartGameOverEffect();
-        }
+        if (fadeEffect != null) { fadeEffect.StartGameOverEffect(); }
 
         highScoreText.gameObject.SetActive(true);
         quitButton.SetActive(true);
@@ -233,11 +214,6 @@ public class GameManager : MonoBehaviour
             }
         }
     }
-
-    void LevelUp()
-    {
-        level++;
-    }
     #endregion
 
     #region Buttons
@@ -248,7 +224,7 @@ public class GameManager : MonoBehaviour
 
         scoreText.gameObject.SetActive(true);
 
-        spawnedBall = Instantiate(ball, startPos, Quaternion.identity);
+        spawnedBall = Instantiate(ball, startPos.transform.position, Quaternion.identity);
         isCanPlay = true;
         StartCoroutine(StartTimer());
     }
@@ -264,19 +240,31 @@ public class GameManager : MonoBehaviour
     public void GameRestart()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+
+        // 다시 시작 누르면 씬 재로딩 하지말고 게임이 다시 시작되게 해도 될거 같은데 님들 생각은 어떰?
+        /* 
+        highScoreText.gameObject.SetActive(false);
+        restartButton.gameObject.SetActive(false);
+        level = 0;
+        score = 0;
+        spawnedBall = Instantiate(ball, startPos.transform.position, Quaternion.identity);
+        Time.timeScale = 1f;
+        isCanPlay = true;
+        StartCoroutine(StartTimer()); 
+        */
     }
-
-
 
     public void StoreClose()
     {
-        store.SetActive(false);
-        spawnedBall = Instantiate(ball, startPos, Quaternion.identity);
+        storeObj.SetActive(false);
+        score = 0;
+        level++;
+        spawnedBall = Instantiate(ball, startPos.transform.position, Quaternion.identity);
         Time.timeScale = 1f;
         StartCoroutine(StartTimer());
     }
 
-    void OnReset()
+    public void Launch()
     {
         Rigidbody2D ballRb = spawnedBall.GetComponent<Rigidbody2D>();
         ballRb.AddForce(Vector2.up * curForce, ForceMode2D.Impulse);
@@ -288,7 +276,6 @@ public class GameManager : MonoBehaviour
         {
             chargeGauge.value = curForce;
         }
-
         Debug.Log($"Rb : {ballRb.velocity}");
     }
 
@@ -309,6 +296,7 @@ public class GameManager : MonoBehaviour
     {
         bought.text = $"{name} 구매";
     }
+
     #endregion
 
     #region Initialize
@@ -332,8 +320,24 @@ public class GameManager : MonoBehaviour
         restartButton = GameObject.Find("Restart");
         restartButton.gameObject.SetActive(false);
 
-        store = GameObject.Find("Store");
-        store.SetActive(false);
+        storeObj = GameObject.Find("Store");
+        store = storeObj.GetComponent<Store>();
+        goldUI = GameObject.Find("Gold").GetComponent<Text>();
+        bought = GameObject.Find("Bought").GetComponent<Text>();
+        storeObj.SetActive(false);
+
+        chargeGauge = GameObject.Find("ChargeSlider").GetComponent<Slider>();
+        chargeGauge.minValue = Min;
+        chargeGauge.maxValue = Max;
+        chargeGauge.value = curForce;
+    }
+    #endregion
+
+    #region Developer Cheat
+    void OnReset()
+    {
+        PlayerPrefs.DeleteKey("HighScore");
+        Debug.Log("기록말살");
     }
     #endregion
 }

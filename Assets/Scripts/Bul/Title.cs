@@ -1,9 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
-
 public class Title : MonoBehaviour
 {
     public GameObject ImageGameObject;
@@ -18,7 +14,6 @@ public class Title : MonoBehaviour
         ButtonGameObject.SetActive(false);
         ButtonGameObject3.SetActive(false);
         ButtonGameObject2.SetActive(true);
-
     }
 
     public void Tutorial()
@@ -30,6 +25,4 @@ public class Title : MonoBehaviour
     {
         SceneManager.LoadScene("GamePlay");
     }
-
-    // 테스트 버전
 }

@@ -5,16 +5,16 @@ public class Wormhole : MonoBehaviour
 {
     public Wormhole destinationWormhole; // (주의) Transform 대신 Wormhole 스크립트를 직접 연결하세요
     public Transform spawnPoint;         // 공이 나올 위치 (웜홀 중심보다 약간 앞쪽에 빈 오브젝트 배치 추천)
-    
+
     public float waitTime = 0.5f;
     public float launchForce = 15f; // 힘을 좀 더 세게 수정
 
-    private bool isCooldown = false; // 쿨타임 체크용
+    bool isCooldown = false; // 쿨타임 체크용
 
-    private void OnTriggerEnter2D(Collider2D other)
+    void OnTriggerEnter2D(Collider2D other)
     {
         // 쿨타임 중이거나, 공이 아니면 무시
-        if (isCooldown || !other.CompareTag("Player")) return;
+        if (isCooldown || !other.CompareTag("Player")) { return; }
 
         StartCoroutine(TeleportProcess(other));
     }
@@ -43,8 +43,7 @@ public class Wormhole : MonoBehaviour
         sr.enabled = false;
         rb.simulated = false;
         rb.velocity = Vector2.zero;
-        if(tr != null) tr.Clear(); // 텔레포트 시 꼬리가 길게 늘어지는 것 방지
-
+        if (tr != null) { tr.Clear(); }  // 텔레포트 시 꼬리가 길게 늘어지는 것 방지
         // 2. 대기
         yield return new WaitForSeconds(waitTime);
 
