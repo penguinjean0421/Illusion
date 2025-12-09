@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7cb61524eb2154786be904b185e516b0, type: 3}
-  m_Name: BBB
+  m_Name: osuP
   m_EditorClassIdentifier: 
-  Type: 0
-  itemID: 222
-  itemName: illusion
-  itemDescription: will o' trick
-  price: 200
-  itemIcon: {fileID: -4302423234172392516, guid: 65140fd9f0fb5424d99100f8252cb26f, type: 3}
+  Type: 1
+  itemID: osuP
+  itemName: 
+  itemDescription: "\uD3EC\uC778\uD2B8 \uC810\uC218 10\uC810 \uC99D\uAC00"
+  price: 0
+  itemIcon: {fileID: 0}
