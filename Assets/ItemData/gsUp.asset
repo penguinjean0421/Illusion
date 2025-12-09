@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Type: 1
   itemID: gsUp
-  itemName: 
+  itemName: "\uAC00\uC7A5\uC758 \uBB34\uAC8C"
   itemDescription: "\uC911\uB825\uC99D\uAC00"
   price: 0
   itemIcon: {fileID: 0}
