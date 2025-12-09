@@ -16,5 +16,5 @@ MonoBehaviour:
   itemID: 222
   itemName: illusion
   itemDescription: will o' trick
-  price: 200
+  price: 0
   itemIcon: {fileID: 0}
