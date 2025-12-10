@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 
+
 public class ShopItemSlot : MonoBehaviour
 {
     [Header("UI References")]
@@ -54,4 +55,8 @@ public class ShopItemSlot : MonoBehaviour
             buyButton.interactable = true;
         }
     }
+
+
+
+
 }

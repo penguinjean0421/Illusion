@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7cb61524eb2154786be904b185e516b0, type: 3}
-  m_Name: cvcMax
+  m_Name: AAA
   m_EditorClassIdentifier: 
-  Type: 2
-  itemID: cvcMax
-  itemName: "\uC0C1\uC7A5\uC8FC\uC2DD"
-  itemDescription: "\uBCF4\uB108\uC2A4 \uC810\uC218\uCD5C\uB313\uAC12 \uC99D\uAC00"
+  Type: 0
+  itemID: 111
+  itemName: DOBU
+  itemDescription: Test ment
   price: 100
-  itemIcon: {fileID: 21300000, guid: da817d264ca5e2d4faf50c720ade9766, type: 3}
+  itemIcon: {fileID: 5142870381175752398, guid: 65140fd9f0fb5424d99100f8252cb26f, type: 3}

@@ -3338,7 +3338,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -5055,8 +5055,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 6b54d336534c66946a1116b5bdeed870, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -5968,12 +5968,13 @@ MonoBehaviour:
   ball: {fileID: 1242723216870563048, guid: 5b83e35f1b7de7f488226cda7b693c98, type: 3}
   spawnedBall: {fileID: 0}
   startPos: {fileID: 1750150172}
-  scoreManager: {fileID: 709629193}
+  leftTorque: 1200
+  rightTorque: 500
   chargeGauge: {fileID: 1773520149}
   curForce: 0
   minScores: 0a00000000000000
   score: 0
-  time: 10
+  time: 1000000
   isCanLaunched: 0
 --- !u!4 &1878655568
 Transform:

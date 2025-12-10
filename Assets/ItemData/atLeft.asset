@@ -16,5 +16,5 @@ MonoBehaviour:
   itemID: atLeft
   itemName: "\uC7AC\uBB34 \uB798\uBC84\uB9AC\uC9C0"
   itemDescription: "\uC67C\uCABD Torque \uAC12\uC744 \uC0C1\uC2B9 \uC2DC\uD0B5\uB2C8\uB2E4."
-  price: 0
+  price: 100
   itemIcon: {fileID: 0}
