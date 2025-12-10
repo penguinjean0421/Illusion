@@ -8,20 +8,19 @@ public class Store : MonoBehaviour
     public List<ItemData> allShopItems;
     public int maxDisplayStore = 6;
 
-
-
     [Header("UI References")]
     public GameObject shopItemSlotPrefab; // ShopItemSlot 스크립트가 붙은 프리팹
     public Transform contentParent;        // 아이템 슬롯들이 생성될 부모 Transform (ScrollView Content)
 
     // 구매 후 버튼 비활성화
     Dictionary<string, ShopItemSlot> itemSlotDictionary = new Dictionary<string, ShopItemSlot>();
+
     internal int playerGold = 0; // 현재 플레이어의 골드
     string boughtItem;
 
     public void SetupShopUI()
     {
-        // 기존의 슬롯이 있다면 모두 제거 (상점 갱신 시 유용)
+        // 기존의 슬롯이 있다면 모두 제거
         foreach (Transform child in contentParent)
         {
             Destroy(child.gameObject);
@@ -78,15 +77,7 @@ public class Store : MonoBehaviour
     void BuyItem(string itemID)
     {
         // 1. 아이템 데이터 조회
-        // ItemData itemToBuy = allShopItems.Find(item => item.itemID == itemID);
-
-        ItemData itemToBuy = allShopItems.Find(item => item != null && item.itemID == itemID);
-
-        if (itemToBuy == null)
-        {
-            Debug.LogError($"오류: ID {itemID}에 해당하는 아이템 데이터를 찾을 수 없습니다.");
-            return;
-        }
+        ItemData itemToBuy = allShopItems.Find(item => item.itemID == itemID);
 
         // 2. 재화 확인 (구매 가능 여부)
         if (playerGold >= itemToBuy.price)
