@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Type: 1
   itemID: osuP
-  itemName: 
+  itemName: "\uD310\uCE58\uAE30 \uB3D9\uC804"
   itemDescription: "\uD3EC\uC778\uD2B8 \uC810\uC218 10\uC810 \uC99D\uAC00"
-  price: 0
+  price: 500
   itemIcon: {fileID: 0}

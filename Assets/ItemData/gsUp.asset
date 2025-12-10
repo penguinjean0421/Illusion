@@ -16,5 +16,5 @@ MonoBehaviour:
   itemID: gsUp
   itemName: "\uAC00\uC7A5\uC758 \uBB34\uAC8C"
   itemDescription: "\uC911\uB825\uC99D\uAC00"
-  price: 0
+  price: 100
   itemIcon: {fileID: 0}

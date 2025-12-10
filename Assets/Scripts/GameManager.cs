@@ -25,6 +25,8 @@ public class GameManager : MonoBehaviour
     Text highScoreText, scoreText;
     Text timerText;
 
+    Text GoalScoreText;
+
     // (슬라이더 UI 컴포넌트를 에디터에서 연결하기 위해 추가)
     public Slider chargeGauge;
     float Max = 45f;
@@ -117,6 +119,31 @@ public class GameManager : MonoBehaviour
 
             // 💡 (현재 curForce 값을 슬라이더의 value에 반영하여 UI 업데이트)
             if (chargeGauge != null) { chargeGauge.value = curForce; }
+        }
+    }
+
+    public void UpdateGoalScore()
+    {
+        // level 변수는 현재 라운드를 나타내며, 배열 인덱스로 사용됨.
+        int arrayIndex = level;
+
+        if (arrayIndex >= 0 && arrayIndex < minScores.Length)
+        {
+            int goalScore = minScores[arrayIndex];
+
+            if (GoalScoreText != null)
+            {
+                // Round 1 Goal: 300 와 같이 표시
+                GoalScoreText.text = $"Round {level + 1} Goal: {goalScore}";
+            }
+        }
+        else
+        {
+            // 배열 범위를 벗어났을 때의 처리 (모든 라운드 완료)
+            if (GoalScoreText != null)
+            {
+                GoalScoreText.text = "All Rounds Completed!";
+            }
         }
     }
 
@@ -231,6 +258,7 @@ public class GameManager : MonoBehaviour
 
         spawnedBall = Instantiate(ball, startPos.transform.position, Quaternion.identity);
         isCanPlay = true;
+        UpdateGoalScore();
         StartCoroutine(StartTimer());
     }
 
@@ -266,6 +294,7 @@ public class GameManager : MonoBehaviour
         level++;
         spawnedBall.SetActive(true);
         spawnedBall.transform.position = startPos.transform.position;
+        UpdateGoalScore();
         StartCoroutine(StartTimer());
     }
 
@@ -294,7 +323,7 @@ public class GameManager : MonoBehaviour
     #region UI
     public void MoneyUpdate(int money)
     {
-        goldUI.text = $"Gold : {money}";
+        goldUI.text = $"Score : {money}";
     }
 
     public void BuyItem(string name)
@@ -313,6 +342,8 @@ public class GameManager : MonoBehaviour
         scoreText.gameObject.SetActive(false);
 
         timerText = GameObject.Find("Timer").GetComponent<Text>();
+
+        GoalScoreText = GameObject.Find("GoalScore").GetComponent<Text>();
 
         left = GameObject.Find("Left").GetComponent<Rigidbody2D>();
         right = GameObject.Find("Right").GetComponent<Rigidbody2D>();

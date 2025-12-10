@@ -87,11 +87,11 @@ public class ItemManager : MonoBehaviour
     {
         if (itemID == "atLeft")
         {
-            GameManager.instance.leftTorque += 10f;
+            GameManager.instance.leftTorque += 100f;
         }
         if (itemID == "atRight")
         {
-            GameManager.instance.rightTorque += 10f;
+            GameManager.instance.rightTorque += 100f;
         }
     }
 
@@ -111,8 +111,8 @@ public class ItemManager : MonoBehaviour
     public void CoefficientValueChange(string itemID)
     {
         Ball ball = GameManager.instance.spawnedBall.GetComponent<Ball>();
-        if (itemID == "cvcMin") { ball.coefficientMin += 0.1f; }
-        if (itemID == "cvcMax") { ball.coefficientMax += 0.1f; }
+        if (itemID == "cvcMin") { ball.coefficientMin += 2f; }
+        if (itemID == "cvcMax") { ball.coefficientMax += 2f; }
     }
     #endregion
 }
