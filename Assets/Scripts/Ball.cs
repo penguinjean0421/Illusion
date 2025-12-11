@@ -9,13 +9,12 @@ public class Ball : MonoBehaviour
     public float maxPosSpeed = 50f;
     public float maxNegSpeed = -50f;
 
-    // 계수 변동
+    // GameManager.UpdateScore 의 float mullIncrease 매개변수 
     float coefficient = 0f;
     internal float coefficientMin = 0.3f;
     internal float coefficientMax = 1.3f;
 
-
-    [Header("장애물별 점수")]
+    // GameManager.UpdateScore 의 int point 매개변수
     internal int bouncerScore = 10;
     internal int pointScore = 20;
     internal int point2Score = 30;
@@ -50,7 +49,6 @@ public class Ball : MonoBehaviour
         switch (collision.gameObject.tag)
         {
             case "Dead":
-
                 if (SceneManager.GetActiveScene().name != "Tutorial")
                 {
                     GameManager.instance.GameEnd();

@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.Collections;
+using Unity.VisualScripting.Dependencies.Sqlite;
 
 public class GameManager : MonoBehaviour
 {
@@ -14,6 +15,8 @@ public class GameManager : MonoBehaviour
 
     public GameObject startPos;
 
+
+    // Torque
     Rigidbody2D left, right;
     public float leftTorque = 1200f;
     public float rightTorque = 500f;
@@ -25,27 +28,26 @@ public class GameManager : MonoBehaviour
     Text highScoreText, scoreText;
     Text timerText;
 
-    Text GoalScoreText;
+    // 점수 
+    Text goalScoreText;
+    int level;
+    public int[] minScores;
+    public int score;
+    int highScore;
 
-    // (슬라이더 UI 컴포넌트를 에디터에서 연결하기 위해 추가)
+    // Charge Gauge
     public Slider chargeGauge;
     float Max = 45f;
     float Min = 21f;
 
-    [SerializeField]
-    float curForce;
+    [SerializeField] float curForce;
+
 
     // 상점
     Store store;
     GameObject storeObj;
     Text goldUI;
     Text bought;
-
-    // 점수
-    int level;
-    public int[] minScores;
-    public int score;
-    int highScore;
 
     // 타이머
     public float time;
@@ -131,19 +133,13 @@ public class GameManager : MonoBehaviour
         {
             int goalScore = minScores[arrayIndex];
 
-            if (GoalScoreText != null)
-            {
-                // Round 1 Goal: 300 와 같이 표시
-                GoalScoreText.text = $"Round {level + 1} Goal: {goalScore}";
-            }
+            // Round 1 Goal: 300 와 같이 표시
+            goalScoreText.text = $"Round {level + 1} Goal: {goalScore}";
         }
         else
         {
             // 배열 범위를 벗어났을 때의 처리 (모든 라운드 완료)
-            if (GoalScoreText != null)
-            {
-                GoalScoreText.text = "All Rounds Completed!";
-            }
+            goalScoreText.text = "All Rounds Completed!";
         }
     }
 
@@ -167,14 +163,10 @@ public class GameManager : MonoBehaviour
             isCanLaunched = false;
         }
 
-        if (Input.GetKey(KeyCode.A))
-        {
-            left.AddTorque(leftTorque);
-        }
+        if (Input.GetKey(KeyCode.A)) { left.AddTorque(leftTorque); }
         else { left.AddTorque(-rightTorque); }
 
-        if (Input.GetKey(KeyCode.L))
-        { right.AddTorque(-leftTorque); }
+        if (Input.GetKey(KeyCode.L)) { right.AddTorque(-leftTorque); }
         else { right.AddTorque(rightTorque); }
 
         Cheat();
@@ -190,15 +182,15 @@ public class GameManager : MonoBehaviour
 
     public void GameEnd()
     {
+        Time.timeScale = 0f;
+
         if (curTime > 0 || score < minScores[level])
         {
-            Time.timeScale = 0f;
             GameOver();
             Destroy(spawnedBall);
         }
         else
         {
-            spawnedBall.SetActive(false);
             storeObj.SetActive(true);
             store.SetupShopUI();
         }
@@ -227,7 +219,7 @@ public class GameManager : MonoBehaviour
     IEnumerator StartTimer()
     {
         curTime = time;
-        /* curTime = time[level]; */ // Lv마다 다르게 할거면 이걸로 변경
+        // curTime = time[level]; // Lv마다 다르게 할거면 이걸로 변경
 
         while (curTime > 0)
         {
@@ -289,11 +281,10 @@ public class GameManager : MonoBehaviour
 
     public void StoreClose()
     {
-        storeObj.SetActive(false);
         score = 0;
         level++;
-        spawnedBall.SetActive(true);
         spawnedBall.transform.position = startPos.transform.position;
+        storeObj.SetActive(false);
         UpdateGoalScore();
         StartCoroutine(StartTimer());
     }
@@ -302,14 +293,13 @@ public class GameManager : MonoBehaviour
     {
         Rigidbody2D ballRb = spawnedBall.GetComponent<Rigidbody2D>();
         ballRb.AddForce(Vector2.up * curForce, ForceMode2D.Impulse);
+
+
         // 발사 후 게이지 초기 위치로 돌리기
         curForce = Min + 1f;
 
-        // UI도 초기화 (Launch는 Update 바깥에서 호출될 가능성이 높으므로 명시적으로 업데이트)
-        if (chargeGauge != null)
-        {
-            chargeGauge.value = curForce;
-        }
+        // UI 초기화
+        chargeGauge.value = curForce;
         Debug.Log($"Rb : {ballRb.velocity}");
     }
 
@@ -317,20 +307,19 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene("Title");
     }
-
     #endregion
 
     #region UI
     public void MoneyUpdate(int money)
     {
-        goldUI.text = $"Score : {money}";
+        goldUI.text = $"Gold : {money} G";
+
     }
 
     public void BuyItem(string name)
     {
         bought.text = $"{name} 구매 완료";
     }
-
     #endregion
 
     #region Initialize
@@ -343,7 +332,7 @@ public class GameManager : MonoBehaviour
 
         timerText = GameObject.Find("Timer").GetComponent<Text>();
 
-        GoalScoreText = GameObject.Find("GoalScore").GetComponent<Text>();
+        goalScoreText = GameObject.Find("GoalScore").GetComponent<Text>();
 
         left = GameObject.Find("Left").GetComponent<Rigidbody2D>();
         right = GameObject.Find("Right").GetComponent<Rigidbody2D>();
@@ -374,6 +363,7 @@ public class GameManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.P)) { Reset(); }
         if (Input.GetKeyDown(KeyCode.O)) { AddScore(); }
+        if (Input.GetKeyDown(KeyCode.Alpha9)) { ShutDown(); }
     }
 
     void Reset()
@@ -386,5 +376,11 @@ public class GameManager : MonoBehaviour
     {
         UpdateScore(10, 1);
     }
+
+    void ShutDown()
+    {
+        curTime = 0f;
+    }
+
     #endregion
 }

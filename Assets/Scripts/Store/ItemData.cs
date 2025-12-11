@@ -16,9 +16,9 @@ public class ItemData : ScriptableObject
         }
 
         // 상점에 표시될 정보
+        public Sprite itemIcon; // 아이콘
         public string itemID; // 고유번호
         public string itemName; // 이름
         public string itemDescription; // 설명
         public int price; // 가격
-        public Sprite itemIcon; // 아이콘
 }
