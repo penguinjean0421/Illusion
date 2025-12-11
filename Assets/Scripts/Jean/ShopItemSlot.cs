@@ -11,7 +11,6 @@ public class ShopItemSlot : MonoBehaviour
     public Text descriptionText;
     public Text priceText;
     public Button buyButton;
-
     // 구매 이벤트가 발생했을 때 호출할 델리게이트 (ItemID를 넘겨줍니다)
     public Action<string> OnBuyButtonClicked;
 
@@ -55,8 +54,4 @@ public class ShopItemSlot : MonoBehaviour
             buyButton.interactable = true;
         }
     }
-
-
-
-
 }

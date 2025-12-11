@@ -167,14 +167,10 @@ public class GameManager : MonoBehaviour
             isCanLaunched = false;
         }
 
-        if (Input.GetKey(KeyCode.A))
-        {
-            left.AddTorque(leftTorque);
-        }
+        if (Input.GetKey(KeyCode.A)) { left.AddTorque(leftTorque); }
         else { left.AddTorque(-rightTorque); }
 
-        if (Input.GetKey(KeyCode.L))
-        { right.AddTorque(-leftTorque); }
+        if (Input.GetKey(KeyCode.L)) { right.AddTorque(-leftTorque); }
         else { right.AddTorque(rightTorque); }
 
         Cheat();
@@ -331,6 +327,11 @@ public class GameManager : MonoBehaviour
         bought.text = $"{name} 구매 완료";
     }
 
+    public void BoughtItem(string itemID)
+    {
+        ItemCounter itemCounter = GameObject.Find(itemID).GetComponent<ItemCounter>();
+        itemCounter.Count(itemID);
+    }
     #endregion
 
     #region Initialize
@@ -384,7 +385,7 @@ public class GameManager : MonoBehaviour
 
     void AddScore()
     {
-        UpdateScore(10, 1);
+        UpdateScore(100, 1);
     }
     #endregion
 }

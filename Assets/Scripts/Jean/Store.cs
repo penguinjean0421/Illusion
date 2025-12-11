@@ -86,10 +86,11 @@ public class Store : MonoBehaviour
             playerGold -= itemToBuy.price; // 골드 차감 (실제로는 인벤토리/재화 관리자 호출)
             boughtItem = itemToBuy.itemName;
 
+            GameManager.instance.BoughtItem(itemToBuy.itemID);
+
             // 아이템 지급 로직 (예시)
             Debug.Log($"**구매 성공**: {itemToBuy.Type} 타입 아이템 {itemToBuy.itemName}을(를) {itemToBuy.price} 골드로 구매했습니다.");
             Debug.Log($"남은 골드: {playerGold}");
-
 
             switch (itemToBuy.Type)
             {
@@ -111,7 +112,6 @@ public class Store : MonoBehaviour
                 default:
                     break;
             }
-
             if (itemSlotDictionary.TryGetValue(itemID, out ShopItemSlot purchasedSlot)) { purchasedSlot.DisableButton(); }
 
             UpdatePlayerCurrencyUI(); // 구매 후 UI 갱신 (선택 사항: 재화 표시 등)
