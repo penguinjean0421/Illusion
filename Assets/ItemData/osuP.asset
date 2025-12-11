@@ -15,6 +15,6 @@ MonoBehaviour:
   Type: 1
   itemID: osuP
   itemName: "\uD310\uCE58\uAE30 \uB3D9\uC804"
-  itemDescription: "\uD3EC\uC778\uD2B8 \uC810\uC218 10\uC810 \uC99D\uAC00"
+  itemDescription: "\uBC94\uD37C \uC810\uC218 10\uC810 \uC99D\uAC00"
   price: 500
-  itemIcon: {fileID: 0}
+  itemIcon: {fileID: 21300000, guid: 7a06b8e43179a4048b67fb182fb93319, type: 3}

@@ -15,6 +15,6 @@ MonoBehaviour:
   Type: 2
   itemID: gsUp
   itemName: "\uAC00\uC7A5\uC758 \uBB34\uAC8C"
-  itemDescription: "\uC911\uB825\uC99D\uAC00"
+  itemDescription: "\uACF5\uC758 \uC911\uB825\uC774 \uC99D\uAC00\uD569\uB2C8\uB2E4."
   price: 100
-  itemIcon: {fileID: 0}
+  itemIcon: {fileID: 21300000, guid: 997123f713fed3e4588e4ab033383694, type: 3}

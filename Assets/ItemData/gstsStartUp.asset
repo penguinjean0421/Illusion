@@ -15,6 +15,7 @@ MonoBehaviour:
   Type: 1
   itemID: gstsStartUp
   itemName: "\uC6D4\uAE09\uB0A0"
-  itemDescription: "\uC2DC\uC791\uC810 \uBC29\uBB38\uC2DC \uC810\uC218 \uC99D\uAC00"
+  itemDescription: "\uC2DC\uC791\uC810 \uBC29\uBB38\uC2DC\uC758 \uC810\uC218\uAC00
+    \uC99D\uAC00\uD569\uB2C8\uB2E4"
   price: 150
-  itemIcon: {fileID: 0}
+  itemIcon: {fileID: 21300000, guid: 386a909960be3fb4893a900784b8fbdb, type: 3}

@@ -2431,7 +2431,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &709629192
 Transform:
   m_ObjectHideFlags: 0
@@ -2459,8 +2459,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7284195348eaa57439c9c6310ad0c125, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textEffectPrefab: {fileID: 1028988764105331583, guid: c7fa364b1b9363549b5e6b6bf07bb909, type: 3}
-  canvasTransform: {fileID: 2137429277}
 --- !u!1 &766958775
 GameObject:
   m_ObjectHideFlags: 0

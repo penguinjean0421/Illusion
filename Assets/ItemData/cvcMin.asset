@@ -15,6 +15,7 @@ MonoBehaviour:
   Type: 2
   itemID: cvcMin
   itemName: "\uBE44\uC0C1\uC7A5\uC8FC\uC2DD"
-  itemDescription: "\uBCF4\uB108\uC2A4 \uC810\uC218\uCD5C\uC19F\uAC12 \uC99D\uAC00"
+  itemDescription: "\uBCF4\uB108\uC2A4 \uB79C\uB364 \uC810\uC218\uC758 \uCD5C\uC19F\uAC12
+    \uC99D\uAC00"
   price: 100
-  itemIcon: {fileID: 21300000, guid: 22f6a469c7380a046a86611182d69117, type: 3}
+  itemIcon: {fileID: 21300000, guid: aaee3d3f16b714b40a733f9ae0b61ca2, type: 3}

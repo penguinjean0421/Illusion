@@ -15,6 +15,7 @@ MonoBehaviour:
   Type: 2
   itemID: atLeft
   itemName: "\uC7AC\uBB34 \uB798\uBC84\uB9AC\uC9C0"
-  itemDescription: "\uC67C\uCABD Torque \uAC12\uC744 \uC0C1\uC2B9 \uC2DC\uD0B5\uB2C8\uB2E4."
+  itemDescription: "\uC67C\uCABD \uD50C\uB9AC\uD37C\uC758 \uD798\uC744 \uC0C1\uC2B9
+    \uC2DC\uD0B5\uB2C8\uB2E4."
   price: 100
-  itemIcon: {fileID: 0}
+  itemIcon: {fileID: 21300000, guid: fbf52801f4d967848b54dd93302f04d9, type: 3}
