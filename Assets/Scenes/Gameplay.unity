@@ -3457,7 +3457,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: -50}
   m_SizeDelta: {x: 320, y: 60}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &720631543
@@ -8587,10 +8587,10 @@ MonoBehaviour:
   startPos: {fileID: 1750150172}
   leftTorque: 1200
   rightTorque: 1200
-  chargeGauge: {fileID: 259568}
-  curForce: 0
   minScores: fa00000058020000b0040000d0070000b80b00009f860100
   score: 0
+  chargeGauge: {fileID: 259568}
+  curForce: 0
   time: 30
   isCanLaunched: 0
 --- !u!4 &1878655568

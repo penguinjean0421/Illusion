@@ -2,7 +2,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.Collections;
-using Unity.VisualScripting.Dependencies.Sqlite;
 
 public class GameManager : MonoBehaviour
 {
@@ -169,7 +168,7 @@ public class GameManager : MonoBehaviour
         if (Input.GetKey(KeyCode.L)) { right.AddTorque(-leftTorque); }
         else { right.AddTorque(rightTorque); }
 
-        Cheat();
+        if (Input.GetKey(KeyCode.LeftShift)) { Cheat(); }
     }
 
     public void UpdateScore(int point, float mullIncrease)
@@ -281,7 +280,6 @@ public class GameManager : MonoBehaviour
 
     public void StoreClose()
     {
-        score = 0;
         level++;
         spawnedBall.transform.position = startPos.transform.position;
         storeObj.SetActive(false);
@@ -313,7 +311,6 @@ public class GameManager : MonoBehaviour
     public void MoneyUpdate(int money)
     {
         goldUI.text = $"Gold : {money} G";
-
     }
 
     public void BuyItem(string name)
@@ -371,6 +368,7 @@ public class GameManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.O)) { AddScore(); }
         if (Input.GetKeyDown(KeyCode.Alpha9)) { ShutDown(); }
     }
+
 
     void Reset()
     {
