@@ -19,7 +19,7 @@ public class Wormhole : MonoBehaviour
         StartCoroutine(TeleportProcess(other));
     }
 
-    // 외부에서 쿨타임을 걸 수 있게 하는 함수
+    // 외부에서 쿨타임을 걸 수 있게 함
     public void ActivateCooldown()
     {
         StartCoroutine(CooldownRoutine());
@@ -44,6 +44,7 @@ public class Wormhole : MonoBehaviour
         rb.simulated = false;
         rb.velocity = Vector2.zero;
         if (tr != null) { tr.Clear(); }  // 텔레포트 시 꼬리가 길게 늘어지는 것 방지
+
         // 2. 대기
         yield return new WaitForSeconds(waitTime);
 

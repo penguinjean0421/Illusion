@@ -30,28 +30,18 @@ public class ShopItemSlot : MonoBehaviour
         // 버튼 클릭 시 외부(ShopManager)에 이 아이템의 ID로 구매 요청을 보냅니다.
         buyButton.onClick.RemoveAllListeners();
         buyButton.onClick.AddListener(() =>
-        {
-            if (OnBuyButtonClicked != null)
-            {
-                OnBuyButtonClicked(currentItemData.itemID);
-            }
-        });
+        { OnBuyButtonClicked(currentItemData.itemID); });
     }
 
     // 구매 버튼 비활성화
     public void DisableButton()
     {
-        if (buyButton != null)
-        {
-            buyButton.interactable = false;
-        }
+        buyButton.interactable = false;
     }
 
+    // 구매 버튼 활성화
     public void EnableButton()
     {
-        if (buyButton != null)
-        {
-            buyButton.interactable = true;
-        }
+        buyButton.interactable = true;
     }
 }

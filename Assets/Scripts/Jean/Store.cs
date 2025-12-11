@@ -76,20 +76,17 @@ public class Store : MonoBehaviour
 
     void BuyItem(string itemID)
     {
-        // 1. 아이템 데이터 조회
         ItemData itemToBuy = allShopItems.Find(item => item.itemID == itemID);
 
-        // 2. 재화 확인 (구매 가능 여부)
         if (playerGold >= itemToBuy.price)
         {
-            // 3. 구매 처리
-            playerGold -= itemToBuy.price; // 골드 차감 (실제로는 인벤토리/재화 관리자 호출)
+            playerGold -= itemToBuy.price;
             boughtItem = itemToBuy.itemName;
 
             GameManager.instance.BoughtItem(itemToBuy.itemID);
 
             // 아이템 지급 로직 (예시)
-            Debug.Log($"**구매 성공**: {itemToBuy.Type} 타입 아이템 {itemToBuy.itemName}을(를) {itemToBuy.price} 골드로 구매했습니다.");
+            Debug.Log($"**구매 성공** 남은 골드: {playerGold}");
             Debug.Log($"남은 골드: {playerGold}");
 
             switch (itemToBuy.Type)
@@ -105,16 +102,16 @@ public class Store : MonoBehaviour
                     ItemManager.instance.CoefficientValueChange(itemToBuy.itemID);
                     break;
 
-                // case (ItemData.ItemType.Test):
-                //     Debug.Log("Test Item");
-                //     break;
+                case (ItemData.ItemType.Test):
+                    Debug.Log("Test Item");
+                    break;
 
                 default:
                     break;
             }
-            if (itemSlotDictionary.TryGetValue(itemID, out ShopItemSlot purchasedSlot)) { purchasedSlot.DisableButton(); }
 
-            UpdatePlayerCurrencyUI(); // 구매 후 UI 갱신 (선택 사항: 재화 표시 등)
+            if (itemSlotDictionary.TryGetValue(itemID, out ShopItemSlot purchasedSlot)) { purchasedSlot.DisableButton(); }
+            UpdatePlayerCurrencyUI(); // 구매 후 UI 갱신
         }
         else
         {
@@ -125,9 +122,6 @@ public class Store : MonoBehaviour
 
     void UpdatePlayerCurrencyUI()
     {
-        // TODO: 게임 내 재화 표시 UI를 업데이트하는 코드를 여기에 작성하세요.
-        // 예를 들어: UIManager.Instance.UpdateGoldText(playerGold);
-
         GameManager.instance.MoneyUpdate(playerGold);
         GameManager.instance.BuyItem(boughtItem);
     }
