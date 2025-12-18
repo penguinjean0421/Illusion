@@ -39,11 +39,12 @@ public class Wormhole : MonoBehaviour
         SpriteRenderer sr = ball.GetComponent<SpriteRenderer>();
         TrailRenderer tr = ball.GetComponent<TrailRenderer>(); // 꼬리 효과가 있다면 가져오기
 
+
         // 1. 사라지는 연출
         sr.enabled = false;
         rb.simulated = false;
         rb.velocity = Vector2.zero;
-        if (tr != null) { tr.Clear(); }  // 텔레포트 시 꼬리가 길게 늘어지는 것 방지
+        if (tr != null) { tr.Clear(); tr.enabled = false; }  // 텔레포트 시 꼬리가 길게 늘어지는 것 방지
 
         // 2. 대기
         yield return new WaitForSeconds(waitTime);
@@ -60,6 +61,10 @@ public class Wormhole : MonoBehaviour
         // 5. 다시 나타나기
         sr.enabled = true;
         rb.simulated = true;
+        if (tr != null)
+        {
+            tr.enabled = true;
+        }
 
         // 6. 발사 (spawnPoint의 위쪽 방향으로)
         Vector2 dir = spawnPoint != null ? spawnPoint.up : destinationWormhole.transform.up;
